@@ -1,0 +1,28 @@
+{
+  "name": "bedrock",
+  "version": "1.0.0",
+  "description": "backend system for bedrock editor",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsc -p tsconfig.json && node dist/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mostafa-abokhadra/bedrock.git"
+  },
+  "author": "abokhadraMostafa10@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mostafa-abokhadra/bedrock/issues"
+  },
+  "homepage": "https://github.com/mostafa-abokhadra/bedrock#readme",
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "typescript": "^5.9.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.1.0"
+  }
+}
