@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsc -p tsconfig.json && node dist/server.js",
-    "build": "tsc --build --clean && tsc"
   },
   "repository": {
     "type": "git",
