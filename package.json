@@ -4,7 +4,7 @@
   "description": "backend system for bedrock editor",
   "main": "index.js",
   "scripts": {
-    "dev": "tsc -p tsconfig.json && node dist/server.js",
+    "dev": "tsc -p tsconfig.json && node dist/server.js"
   },
   "repository": {
     "type": "git",
