@@ -3,8 +3,8 @@ import express from "express";
 
 const server = express()
 
-server.get('/', (req, res) => {
-    return res.send(`<h1>Hello bedrock</h1>`);
+server.get('/', async (req, res) => {
+    return res.send("<h1>Bedrock Home Page</h1>");
 })
 
 server.listen(process.env.PORT, () => {
