@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DEV_DATABASE_URL")
+  // connection_limit = 10
+}
+
+enum Accessibility {
+  PRIVATE
+  PUBLIC
+}
+
+model Metadata {
+  id Int @id @default(autoincrement())
+  indices String[]
+  tags String[]
+  file File? @relation(fields: [fileId], references: [id], onDelete: Cascade)
+  fileId Int? @unique
+}
+model File {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  access Accessibility @default(PRIVATE)
+  title String @unique
+  content String
+  search Metadata?
+
+  parent Folder? @relation(fields: [parentId], references: [id], onDelete: Cascade)
+  parentId Int? @unique
+  vault Vault @relation(fields: [vaultId], references: [id], onDelete: Cascade)
+  vaultId Int 
+}
+model Folder {
+  id Int @id @default(autoincrement())
+  name String @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  parent Folder? @relation(name: "FolderHierarchy", fields: [parentId], references: [id], onDelete: Cascade) 
+  parentId Int? @unique
+
+  folders Folder[] @relation("FolderHierarchy")
+  files File[]
+  vault Vault @relation(fields: [vaultId], references: [id], onDelete: Cascade)
+  vaultId Int 
+}
+model Vault {
+  id Int @id @default(autoincrement())
+  name String @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  folders Folder[]
+  files File[]
+}
