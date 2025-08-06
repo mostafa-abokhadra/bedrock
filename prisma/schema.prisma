@@ -17,7 +17,7 @@ model Metadata {
   id Int @id @default(autoincrement())
   indices String[]
   tags String[]
-  file File? @relation(fields: [fileId], references: [id])
+  file File? @relation(fields: [fileId], references: [id], onDelete: Cascade)
   fileId Int? @unique
 }
 model File {
@@ -29,9 +29,9 @@ model File {
   content String
   search Metadata?
 
-  parent Folder? @relation(fields: [parentId], references: [id])
+  parent Folder? @relation(fields: [parentId], references: [id], onDelete: Cascade)
   parentId Int? @unique
-  vault Vault @relation(fields: [vaultId], references: [id])
+  vault Vault @relation(fields: [vaultId], references: [id], onDelete: Cascade)
   vaultId Int 
 }
 model Folder {
@@ -40,12 +40,12 @@ model Folder {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  parent Folder? @relation(name: "FolderHierarchy", fields: [parentId], references: [id]) 
+  parent Folder? @relation(name: "FolderHierarchy", fields: [parentId], references: [id], onDelete: Cascade) 
   parentId Int? @unique
 
   folders Folder[] @relation("FolderHierarchy")
   files File[]
-  vault Vault @relation(fields: [vaultId], references: [id])
+  vault Vault @relation(fields: [vaultId], references: [id], onDelete: Cascade)
   vaultId Int 
 }
 model Vault {
