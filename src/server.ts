@@ -2,8 +2,12 @@ import "dotenv/config";
 import express from "express";
 import sessionMiddleware from "./config/session.js"
 
+import loginRoutes from './routes/loginRoutes.js'
+
 const server = express()
+
 server.use(sessionMiddleware)
+server.use('/auth', loginRoutes);
 
 server.use(express.json())
 server.use(express.urlencoded({extended: true}))
