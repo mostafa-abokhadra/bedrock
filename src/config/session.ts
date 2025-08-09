@@ -12,7 +12,7 @@ const sessionConfig: session.SessionOptions = {
         // sameSite: 'strict'
     },
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     // store: 
 }
 

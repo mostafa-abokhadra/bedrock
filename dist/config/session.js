@@ -13,6 +13,6 @@ const sessionConfig = {
         httpOnly: true,
     },
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
 };
 exports.default = (0, express_session_1.default)(sessionConfig);

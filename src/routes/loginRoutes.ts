@@ -1,5 +1,7 @@
 import express from "express"
 import { emailValidator, passwordValidator } from "../validation/loginValidator";
+import handleValidationError from "../middlewares/handleValidationErrors";
+
 import { blockAuthenticatedUser } from "../middlewares/sessionManage";
 
 const router = express.Router()
@@ -10,6 +12,7 @@ router.post('/login',
     blockAuthenticatedUser,
     emailValidator,
     passwordValidator,
+    handleValidationError,
     loginController.postLogin
 );
 
