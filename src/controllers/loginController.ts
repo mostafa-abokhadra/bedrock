@@ -1,6 +1,5 @@
 class loginController {
-    static async postLogin(req: object, res: object) {
-        console.log(req, res);
+    static async postLogin(req , res , next) {
     }
 }
 export default loginController;
