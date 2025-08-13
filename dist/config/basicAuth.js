@@ -7,6 +7,7 @@ const passport_1 = __importDefault(require("passport"));
 const passport_local_1 = require("passport-local");
 const client_1 = require("@prisma/client");
 const bcrypt_1 = __importDefault(require("bcrypt"));
+const userUtils_1 = require("../utils/userUtils");
 const prisma = new client_1.PrismaClient();
 passport_1.default.use('local-login', new passport_local_1.Strategy({
     usernameField: 'email',
@@ -14,9 +15,8 @@ passport_1.default.use('local-login', new passport_local_1.Strategy({
 }, async (email, password, done) => {
     try {
         const user = await prisma.user.findUnique({
-            where: { email }
+            where: { email },
         });
-        console.log(user);
         if (!user)
             return done(null, false, { Message: "Email or password is incorrect" });
         if (!user.password) {
@@ -24,29 +24,28 @@ passport_1.default.use('local-login', new passport_local_1.Strategy({
                 message: "This account uses Google login. Please sign in with Google.",
             });
         }
-        console.log(user, "2");
         const validatePassword = await bcrypt_1.default.compare(password, user.password);
         if (!validatePassword)
             return done(null, false, { Message: "Email or password is incorrect" });
-        console.log(user, "3");
-        return done(null, user);
+        const sanitizedUser = await (0, userUtils_1.sanitizeUser)(user.email);
+        return done(null, sanitizedUser);
     }
     catch (error) {
         return done(error, false, { Message: "Server Error Occured", Error: error });
     }
 }));
 passport_1.default.serializeUser((user, done) => {
-    console.log(user.id);
     done(null, user.id);
 });
 passport_1.default.deserializeUser(async (id, done) => {
     const user = await prisma.user.findUnique({
         where: { id },
         select: {
-            id: true
+            id: true,
+            email: true,
+            vaults: true
         }
     });
-    console.log(user);
     done(null, user);
 });
 exports.default = passport_1.default;

@@ -5,18 +5,31 @@ const prisma = new PrismaClient()
 
 class loginController {
     static async postLogin(req: any , res: any , next: any) {
-        passport.authenticate('local-login', (err: object | null, user: object, info: object) => {
-            if (err || !user)
-                return res.status(500).json(info)
-            req.logIn(user, (err: any) => {
-                if (err)
-                    return res.status(500).json(`Can't Login User`)
-            })
-            return res.status(200).json({
-                'info': "User Authenticated Successfully",
-                user: user
-            })
-        })(req, res, next);
+
+        const user = await new Promise((resolve, reject) => {
+
+            passport.authenticate(
+                'local-login',
+                (err: object | null, user: object, info: any) => {
+                    if (err) return reject(err)
+                    if (!user) return reject(info.message)
+
+                    req.logIn(user, (err: any) => {
+                        if (err)
+                            return reject(err)
+                        resolve(user)
+                    })
+
+            })(req, res, next);
+
+    })
+
+        return res.status(200).json({
+            'info': "User Authenticated Successfully",
+            user: user
+        })
+        
     }
+
 }
 export default loginController;

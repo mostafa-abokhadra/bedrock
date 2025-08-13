@@ -7,7 +7,6 @@ require("dotenv/config");
 const express_1 = __importDefault(require("express"));
 const basicAuth_1 = __importDefault(require("./config/basicAuth"));
 const session_1 = __importDefault(require("./config/session"));
-const session_js_1 = __importDefault(require("./config/session.js"));
 const loginRoutes_js_1 = __importDefault(require("./routes/loginRoutes.js"));
 const server = (0, express_1.default)();
 server.use(express_1.default.json());
@@ -15,7 +14,6 @@ server.use(express_1.default.urlencoded({ extended: true }));
 server.use(session_1.default);
 server.use(basicAuth_1.default.initialize());
 server.use(basicAuth_1.default.session());
-server.use(session_js_1.default);
 server.use('/auth', loginRoutes_js_1.default);
 server.get('/', async (req, res) => {
     return res.send("<h1>Bedrock Home page 3</h1>");

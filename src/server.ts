@@ -3,18 +3,17 @@ import express from "express";
 import passport from './config/basicAuth'
 import session from './config/session'
 
-import sessionMiddleware from "./config/session.js"
 
 import loginRoutes from './routes/loginRoutes.js'
 
 const server = express()
 server.use(express.json())
 server.use(express.urlencoded({extended: true}))
+
 server.use(session)
 server.use(passport.initialize())
 server.use(passport.session())
 
-server.use(sessionMiddleware)
 server.use('/auth', loginRoutes);
 
 server.get('/', async (req, res) => {
