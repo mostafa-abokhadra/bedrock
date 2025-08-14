@@ -1,5 +1,6 @@
 import session from "express-session";
 import dotenv from "dotenv"
+import sessionStore from './redis.js'
 
 dotenv.config()
 
@@ -13,7 +14,7 @@ const sessionConfig: session.SessionOptions = {
     },
     resave: false,
     saveUninitialized: false,
-    // store: 
+    store: sessionStore
 }
 
 export default session(sessionConfig);

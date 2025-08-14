@@ -1,14 +1,11 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.passwordValidator = exports.emailValidator = void 0;
-const express_validator_1 = require("express-validator");
-exports.emailValidator = [
-    (0, express_validator_1.body)('email')
+import { body } from 'express-validator';
+export const emailValidator = [
+    body('email')
         .not().isEmpty().withMessage("Email is Required")
         .isEmail().withMessage('Invalide Email Address')
         .normalizeEmail()
 ];
-exports.passwordValidator = [
-    (0, express_validator_1.body)('password')
+export const passwordValidator = [
+    body('password')
         .not().isEmpty().withMessage('password field is required')
 ];

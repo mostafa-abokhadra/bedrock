@@ -1,15 +1,10 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const passport_1 = __importDefault(require("passport"));
-const passport_local_1 = require("passport-local");
-const client_1 = require("@prisma/client");
-const bcrypt_1 = __importDefault(require("bcrypt"));
-const userUtils_1 = require("../utils/userUtils");
-const prisma = new client_1.PrismaClient();
-passport_1.default.use('local-login', new passport_local_1.Strategy({
+import passport from "passport";
+import { Strategy as LocalStrategy } from "passport-local";
+import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcrypt";
+import { sanitizeUser } from "../utils/userUtils.js";
+const prisma = new PrismaClient();
+passport.use('local-login', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password'
 }, async (email, password, done) => {
@@ -24,20 +19,20 @@ passport_1.default.use('local-login', new passport_local_1.Strategy({
                 message: "This account uses Google login. Please sign in with Google.",
             });
         }
-        const validatePassword = await bcrypt_1.default.compare(password, user.password);
+        const validatePassword = await bcrypt.compare(password, user.password);
         if (!validatePassword)
             return done(null, false, { Message: "Email or password is incorrect" });
-        const sanitizedUser = await (0, userUtils_1.sanitizeUser)(user.email);
+        const sanitizedUser = await sanitizeUser(user.email);
         return done(null, sanitizedUser);
     }
     catch (error) {
         return done(error, false, { Message: "Server Error Occured", Error: error });
     }
 }));
-passport_1.default.serializeUser((user, done) => {
+passport.serializeUser((user, done) => {
     done(null, user.id);
 });
-passport_1.default.deserializeUser(async (id, done) => {
+passport.deserializeUser(async (id, done) => {
     const user = await prisma.user.findUnique({
         where: { id },
         select: {
@@ -48,4 +43,4 @@ passport_1.default.deserializeUser(async (id, done) => {
     });
     done(null, user);
 });
-exports.default = passport_1.default;
+export default passport;

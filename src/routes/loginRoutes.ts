@@ -1,11 +1,11 @@
 import express from "express"
-import { emailValidator, passwordValidator } from "../validation/loginValidator";
-import handleValidationError from "../middlewares/handleValidationErrors";
+import { emailValidator, passwordValidator } from "../validation/loginValidator.js";
+import handleValidationError from "../middlewares/handleValidationErrors.js";
 
-import { blockAuthenticatedUser } from "../middlewares/sessionManage";
+import { blockAuthenticatedUser } from "../middlewares/sessionManage.js";
 
 const router = express.Router()
-import loginController from '../controllers/loginController'
+import loginController from '../controllers/loginController.js'
 
 
 router.post('/login',
