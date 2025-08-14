@@ -5,7 +5,8 @@
   "description": "backend system for bedrock editor",
   "main": "index.js",
   "scripts": {
-    "dev": "tsc -p tsconfig.json && node dist/server.js"
+    "dev": "tsc -p tsconfig.json && node dist/server.js",
+    "build": "cd prisma && npx prisma generate && npx prisma migrate dev"
   },
   "repository": {
     "type": "git",
