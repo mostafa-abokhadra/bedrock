@@ -2,8 +2,9 @@ import { createClient } from 'redis'
 import  {RedisStore}  from 'connect-redis'
 
     const redisClient = createClient({
-        url: 'redis://localhost:6379'
-        // 'redis://username:password@host:port/db-number'
+        // url: 'redis://localhost:6379'
+        // url: 'redis://username:password@host:port/db-number'
+        url: process.env.REDIS_SESSION_CACHE_URL
     })
 
     redisClient.on("error", (err) => {
