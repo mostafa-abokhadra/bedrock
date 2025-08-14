@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsc -p tsconfig.json && node dist/server.js",
-    "build": "cd prisma && npx prisma generate && npx prisma migrate dev"
+    "build": "prisma generate",
+    "postinstall": "prisma generate"
   },
   "repository": {
     "type": "git",
