@@ -48,6 +48,12 @@ model Folder {
   vault Vault @relation(fields: [vaultId], references: [id], onDelete: Cascade)
   vaultId Int 
 }
+model User {
+  id String @id @default(uuid())
+  email String @unique
+  password String?
+  vaults Vault[] @relation(name: "UserVault")
+}
 model Vault {
   id Int @id @default(autoincrement())
   name String @unique
@@ -56,4 +62,7 @@ model Vault {
 
   folders Folder[]
   files File[]
+
+  user User @relation(name: "UserVault", fields: [userId], references: [id], onDelete: Cascade)
+  userId String @unique
 }
