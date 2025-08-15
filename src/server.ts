@@ -1,6 +1,8 @@
 import "dotenv/config";
 import express from "express";
-import passport from './config/auth/login.js'
+import passport from "passport";
+import './config/auth/login.js'
+import './config/auth/signup.js'
 import session from './config/session/session.js'
 
 

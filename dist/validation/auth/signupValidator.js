@@ -1,10 +1,25 @@
 import { body } from "express-validator";
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
 export const emailValidator = [
     body('email')
         .trim()
         .not().isEmpty().withMessage('Email Is Required')
         .isEmail().withMessage('Invalide Email Address')
         .normalizeEmail()
+        .custom(async (email) => {
+        try {
+            const isRegistered = await prisma.user.findUnique({
+                where: { email }
+            });
+            if (!isRegistered)
+                return true;
+            throw new Error("User is already Registered");
+        }
+        catch (error) {
+            throw new Error("Error while validating User");
+        }
+    })
 ];
 export const passwordValidator = [
     body('password')

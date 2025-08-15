@@ -4,7 +4,6 @@ import passport from "passport";
 class signupController {
     static async postSignup(req: Req, res: Res, next: Next) {
 
-
     }
 }
 
