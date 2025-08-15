@@ -12,8 +12,9 @@ passport.use('local-login', new LocalStrategy({
         const user = await prisma.user.findUnique({
             where: { email },
         });
-        if (!user)
+        if (!user) {
             return done(null, false, { Message: "Email or password is incorrect" });
+        }
         if (!user.password) {
             return done(null, false, {
                 message: "This account uses Google login. Please sign in with Google.",
@@ -43,4 +44,3 @@ passport.deserializeUser(async (id, done) => {
     });
     done(null, user);
 });
-export default passport;

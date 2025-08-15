@@ -14,13 +14,13 @@ passport.use(
     },
     async (email: string, password: any, done: any) => {
         try {
-            
+
             const user = await prisma.user.findUnique({
                 where: {email},
             })
-
-            if (!user)
+            if (!user) {
                 return done(null, false, {Message: "Email or password is incorrect"})
+            }
 
             if (!user.password) {
                 return done(null, false, {
@@ -62,4 +62,4 @@ passport.deserializeUser(async (id: any, done: any) => {
     done(null, user)
 })
 
-export default passport;
+// export default passport;

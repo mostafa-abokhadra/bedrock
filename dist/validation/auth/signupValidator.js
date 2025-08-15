@@ -17,7 +17,7 @@ export const emailValidator = [
             throw new Error("User is already Registered");
         }
         catch (error) {
-            throw new Error("Error while validating User");
+            throw error;
         }
     })
 ];
