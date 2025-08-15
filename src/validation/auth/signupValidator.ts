@@ -1,6 +1,6 @@
 import {body} from "express-validator"
 
-const emailValidator = [
+export const emailValidator = [
     body('email')
     .trim()
     .not().isEmpty().withMessage('Email Is Required')
@@ -8,7 +8,7 @@ const emailValidator = [
     .normalizeEmail()
 ]
 
-const passwordValidator = [
+export const passwordValidator = [
     body('password')
     .not().isEmpty().withMessage('Password is Required')
     .isLength({min: 12}).withMessage('Must Contain at least 12 Character')
