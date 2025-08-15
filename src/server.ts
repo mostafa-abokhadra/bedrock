@@ -4,7 +4,7 @@ import passport from './config/basicAuth.js'
 import session from './config/session.js'
 
 
-import loginRoutes from './routes/loginRoutes.js'
+import loginRoutes from './routes/auth/loginRoutes.js'
 
 const server = express()
 server.use(express.json())
