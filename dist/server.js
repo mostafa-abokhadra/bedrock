@@ -1,8 +1,10 @@
 import "dotenv/config";
+console.log('DATABASE_URL:', process.env.DATABASE_URL);
 import express from "express";
-import passport from './config/basicAuth.js';
-import session from './config/session.js';
-import loginRoutes from './routes/loginRoutes.js';
+import passport from "./config/auth/passport.js";
+import session from './config/session/session.js';
+import loginRoutes from './routes/auth/loginRoutes.js';
+import signupRoutes from "./routes/auth/signupRoutes.js";
 const server = express();
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
@@ -10,6 +12,7 @@ server.use(session);
 server.use(passport.initialize());
 server.use(passport.session());
 server.use('/auth', loginRoutes);
+server.use('/auth', signupRoutes);
 server.get('/', async (req, res) => {
     return res.send("<h1>Bedrock Home page 3</h1>");
 });
