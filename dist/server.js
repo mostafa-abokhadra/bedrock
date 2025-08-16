@@ -1,5 +1,4 @@
 import "dotenv/config";
-console.log('DATABASE_URL:', process.env.DATABASE_URL);
 import express from "express";
 import passport from "./config/auth/passport.js";
 import session from './config/session/session.js';
