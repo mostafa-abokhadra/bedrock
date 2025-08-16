@@ -4,6 +4,7 @@ import passport from "./config/auth/passport.js";
 import session from './config/session/session.js'
 
 
+import apiDocsRoute from './utils/API-docs.js'
 import loginRoutes from './routes/auth/loginRoutes.js'
 import signupRoutes from "./routes/auth/signupRoutes.js";
 
@@ -17,6 +18,7 @@ server.use(passport.session())
 
 server.use('/auth', loginRoutes);
 server.use('/auth', signupRoutes);
+server.use('/', apiDocsRoute);
 
 server.get('/', async (req, res) => {
     return res.send("<h1>Bedrock Home page 3</h1>");
