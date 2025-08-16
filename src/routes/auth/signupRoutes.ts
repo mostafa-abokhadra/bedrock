@@ -10,28 +10,31 @@ const router = express.Router()
 /**
  * @swagger
  * /auth/signup:
- *  post:
- *    summary: Register a new user
- *      description: Create a new user using email and password
- *      requestBody:
- *        required: true
- *        content:
- *          application/json:
- *            schema:
- *              type: object
- *              properties:
- *                email:
- *                  type: string
- *                password:
- *                  type: string
- *    responses:
+ *   post:
+ *     tags:
+ *       - User Authentication
+ *     summary: Register a new user
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/signupUserReq'
+ *     responses:
  *       201:
  *         description: User created successfully
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/User'
+ *               $ref: '#/components/schemas/signupUserRes'
+ *       400:
+ *         description: invalide user input
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/signupBadRequest"
  */
+
 router.post(
     '/signup',
     blockAuthenticatedUser,

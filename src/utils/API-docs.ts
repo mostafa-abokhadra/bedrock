@@ -12,25 +12,83 @@ const options: swaggerJSDoc.Options = {
             version: '1.0.0',
             description: "bedrock apis documentation"
         },
-        tags: [
-            {
+        tags: [ {
                 name: "User Authentication",
                 description: "signUp, login, and logout user"
-            },
-            {
+            }, {
                 name: "Vault",
                 description: "Vault CRUD Operation APIs"
-            }
+            } 
         ],
-        servers: [
-            {
-                url: 'http://localhost:8080',
-            },
-            {
+        servers: [ {
+                url: 'http://localhost:8080'
+            }, {
                 url: 'https://bedrock-henna.vercel.app/'
             }
         ],
         components: {
+            schemas: {
+                signupUserReq: {
+                    type: "object",
+                    properties: {
+                        email: { 
+                            type: "string",
+                            example: "user@example.com" 
+                        },
+                        password: {
+                            type: "string",
+                            example: "strongPassword123"
+                        },
+                        confirmPassword: {
+                            type: "string",
+                            example: "strongPassword123"
+                        }
+                    },
+                    required: ["email", "password", "confirmPassword"]
+                },
+                signupUserRes: {
+                    type: "object",
+                    properties: {
+                        id: {
+                            type: "string",
+                            example: "random string"
+                        },
+                        email: {
+                            type: "string",
+                            example: "user@example.com"
+                        }
+                    }
+                },
+                signupBadRequest: {
+                    type: "object",
+                    properties: {
+                        errors: {
+                            type: "array",
+                            items: {
+                                type: "object",
+                                properties: {
+                                    msg: {
+                                        type: 'string', example: 'invalide email'
+                                    },
+                                    path: {
+                                        type: 'string', example: 'email',
+                                    },
+                                    location: {
+                                        type: "string", example: "body"
+                                    },
+                                    type: {
+                                        type: "string", example: 'field',
+                                    },
+                                    value: {
+                                        type: "string", example: "invalideEmail@gaamil.com"
+                                    }
+                                },
+
+                            }
+                        }
+                    }
+                }
+            },
             securitySchemes: {
                 // Bearer: {
                 //     type: 'http',
@@ -47,7 +105,7 @@ const options: swaggerJSDoc.Options = {
             },
         },
     },
-    apis: ["./src/routes/auth/*.ts/"],
+    apis: ["./src/routes/auth/*.ts"],
 
 }
 

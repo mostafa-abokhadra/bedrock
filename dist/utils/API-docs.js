@@ -10,25 +10,82 @@ const options = {
             version: '1.0.0',
             description: "bedrock apis documentation"
         },
-        tags: [
-            {
+        tags: [{
                 name: "User Authentication",
                 description: "signUp, login, and logout user"
-            },
-            {
+            }, {
                 name: "Vault",
                 description: "Vault CRUD Operation APIs"
             }
         ],
-        servers: [
-            {
-                url: 'http://localhost:8080',
-            },
-            {
+        servers: [{
+                url: 'http://localhost:8080'
+            }, {
                 url: 'https://bedrock-henna.vercel.app/'
             }
         ],
         components: {
+            schemas: {
+                signupUserReq: {
+                    type: "object",
+                    properties: {
+                        email: {
+                            type: "string",
+                            example: "user@example.com"
+                        },
+                        password: {
+                            type: "string",
+                            example: "strongPassword123"
+                        },
+                        confirmPassword: {
+                            type: "string",
+                            example: "strongPassword123"
+                        }
+                    },
+                    required: ["email", "password", "confirmPassword"]
+                },
+                signupUserRes: {
+                    type: "object",
+                    properties: {
+                        id: {
+                            type: "string",
+                            example: "random string"
+                        },
+                        email: {
+                            type: "string",
+                            example: "user@example.com"
+                        }
+                    }
+                },
+                signupBadRequest: {
+                    type: "object",
+                    properties: {
+                        errors: {
+                            type: "array",
+                            items: {
+                                type: "object",
+                                properties: {
+                                    msg: {
+                                        type: 'string', example: 'invalide email'
+                                    },
+                                    path: {
+                                        type: 'string', example: 'email',
+                                    },
+                                    location: {
+                                        type: "string", example: "body"
+                                    },
+                                    type: {
+                                        type: "string", example: 'field',
+                                    },
+                                    value: {
+                                        type: "string", example: "invalideEmail@gaamil.com"
+                                    }
+                                },
+                            }
+                        }
+                    }
+                }
+            },
             securitySchemes: {
                 apiKeyAuth: {
                     type: 'apiKey',
@@ -39,10 +96,9 @@ const options = {
             },
         },
     },
-    apis: ["./src/routes/auth/*.ts/", "./src/utils/API-docs.ts"],
+    apis: ["./src/routes/auth/*.ts"],
 };
 const swaggerSpec = swaggerJSDoc(options);
 console.log(JSON.stringify(swaggerSpec, null, 2));
-router.get('/test', (req, res, next) => { console.log("hello"); res.status(200).send("OK"); });
 router.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 export default router;
