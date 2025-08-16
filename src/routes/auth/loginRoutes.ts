@@ -19,7 +19,8 @@ router.post(
 
 router.post(
     '/logout',
-    isAuthenticated
+    isAuthenticated,
+    loginController.logout
 )
 
 export default router;
