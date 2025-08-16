@@ -19,5 +19,20 @@ class loginController {
         })(req, res, next); 
     }
 
+    static async logout(req: any, res: any, next: any) {
+        req.logout((err: any) => {
+            if (err)
+                return res.status(500).json({"message": `can not logout the user`});
+
+            req.session.destroy((err: any) => {
+                if (err)
+                    return res.status(500).json({"message": "can not destory the session"})
+            })
+
+            res.clearCookie("bedrockCookie")
+
+            return res.status(200).json({"message": "logged out successfully"})
+        })
+    }
 }
 export default loginController;
