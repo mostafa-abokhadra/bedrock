@@ -61,6 +61,27 @@ components:
               value:
                 type: string
                 example: yourInvalideEmailValue@example.com
+    LoginRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          example: validRegisteredEmail@example.com
+        password:
+          type: string
+          example: yourStrongPassword123#
+      required:
+        - email
+        - password
+    LoginOkResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
+        email:
+          type: string
+          example: validRegisteredEmail@example.com
 
 
 security:
@@ -91,6 +112,25 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SignupBadRequestResponse"
+  /aut/login:
+    post:
+      tags:
+        - User Authentication
+      summary: Login the user in and creating a new session
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        200:
+          description: successfull login attempt
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginOkResponse'
+
 
 
 # // Bearer: {
