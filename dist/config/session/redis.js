@@ -8,6 +8,4 @@ redisClient.on("error", (err) => {
 });
 await redisClient.connect();
 const sessionStore = new RedisStore({ client: redisClient });
-if (redisClient.isReady)
-    console.log(`i'm ready`);
 export default sessionStore;

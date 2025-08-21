@@ -35,7 +35,7 @@ passport.use(
 
             const sanitizedUser = await sanitizeUser(user.email)
 
-            return done(null, sanitizedUser)
+            return done(null, sanitizedUser, {Message: 'User logged in successfully'})
 
         } catch(error) {
 
