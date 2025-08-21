@@ -68,7 +68,7 @@ components:
                 type: string
                 example: ''
 
-    SignupBadRequestResponse2:
+    SignupCantCreateUserResponse:
       type: object
       properties:
         message:
@@ -138,6 +138,13 @@ components:
         message:
           type: string
           example: Email or password is incorrect
+    
+    InvalidCredentailsMethod:
+      type: object
+      properties:
+        messgae:
+          type: string
+          example: This account uses Google login. Please sign in with Google.
 
 
 # security:
@@ -169,7 +176,6 @@ paths:
               schema:
                 anyOf:
                   - $ref: "#/components/schemas/BadRequestResponse"
-                  - $ref: "#/components/schemas/SignupBadRequestResponse2"
         409:
           description: when user trying to Authenticate while already is Authenticated
           content:
@@ -184,6 +190,7 @@ paths:
                 anyOf:
                   - $ref: '#/components/schemas/ServerError1'
                   - $ref: '#/components/schemas/ServerError2'
+                  - $ref: "#/components/schemas/SignupCantCreateUserResponse"
   /auth/login:
     post:
       tags:
@@ -210,6 +217,7 @@ paths:
                 anyOf:
                   - $ref: "#/components/schemas/BadRequestResponse"
                   - $ref: "#/components/schemas/LoginBadRequest"
+                  - $ref: "#/components/schemas/InvalidCredentailsMethod"
 
         409:
           description: when user try to authenticate while already is Authenticated
@@ -217,6 +225,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AlreadyAuthenticated'
+        
+        500:
+          description: when a server error occur or couldn't login user
+          content:
+            application/json:
+              schema:
+                anyOf:
+                  - $ref: '#/components/schemas/ServerError1'
+                  - $ref: '#/components/schemas/ServerError2'
+                  
 
 
 # // Bearer: {
