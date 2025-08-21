@@ -74,12 +74,6 @@ components:
         message:
           type: string
           example: Can't Create User
-        errors:
-          type: string
-          example: unknown prisma error
-        somethingElss:
-          type: string
-          example: maybe
 
     LoginRequest:
       type: object
@@ -113,8 +107,7 @@ components:
         message:
           type: string
           example: Already Authenticated
-      required:
-        - message
+
     isAuthenticated:
       type: object
       properties:
@@ -153,6 +146,12 @@ paths:
                 anyOf:
                   - $ref: "#/components/schemas/SignupBadRequestResponse1"
                   - $ref: "#/components/schemas/SignupBadRequestResponse2"
+        409:
+          description: when user trying to Authenticate while already is Authenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlreadyAuthenticated'
   /auth/login:
     post:
       tags:
