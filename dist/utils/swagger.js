@@ -7,5 +7,5 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const router = express.Router();
 const swaggerDoc = YAML.load(path.resolve(__dirname, '../../src/docs/swagger.yaml'));
-router.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+router.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 export default router;
