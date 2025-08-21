@@ -145,6 +145,13 @@ components:
         messgae:
           type: string
           example: This account uses Google login. Please sign in with Google.
+    
+    SuccessfulLogoutResponse:
+      type: object
+      properties:
+        messge: 
+          type: string
+          example: logged out successfully
 
 
 # security:
@@ -234,9 +241,19 @@ paths:
                 anyOf:
                   - $ref: '#/components/schemas/ServerError1'
                   - $ref: '#/components/schemas/ServerError2'
-                  
-
-
+  
+  /auth/logout:
+    post:
+      tags:
+        - User Authentication
+      summary: logging out an authenticated user
+      responses:
+        200:
+          description: successfully logging out user, destroying session and clearing cookie
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessfulLogoutResponse'
 # // Bearer: {
 # //     type: 'http',
 # //     schema: "bearer",
