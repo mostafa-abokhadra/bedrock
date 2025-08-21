@@ -13,6 +13,7 @@ components:
       type: http
       scheme: basic
   schemas:
+
     SignupRequest:
       type: object
       properties:
@@ -29,16 +30,21 @@ components:
         - email
         - password
         - confirmPassword
+
     SignupOkResponse:
       type: object
       properties:
+        message:
+          type: string
+          example: User Created Successfully
         id:
           type: string
           example: 123e4567-e89b-12d3-a456-426614174000
         email:
           type: string
           example: mostafa@example.com
-    SignupBadRequestResponse:
+
+    SignupBadRequestResponse1:
       type: object
       properties:
         errors:
@@ -61,6 +67,20 @@ components:
               value:
                 type: string
                 example: yourInvalideEmailValue@example.com
+
+    SignupBadRequestResponse2:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Can't Create User
+        errors:
+          type: string
+          example: unknown prisma error
+        somethingElss:
+          type: string
+          example: maybe
+
     LoginRequest:
       type: object
       properties:
@@ -73,21 +93,28 @@ components:
       required:
         - email
         - password
+
     LoginOkResponse:
       type: object
       properties:
+        message:
+          type: string
+          example: User logged in successfully
         id:
           type: string
           example: 123e4567-e89b-12d3-a456-426614174000
         email:
           type: string
           example: validRegisteredEmail@example.com
+
     AlreadyAuthenticated:
       type: object
       properties:
         message:
           type: string
           example: Already Authenticated
+      required:
+        - message
     isAuthenticated:
       type: object
       properties:
@@ -96,9 +123,9 @@ components:
           example: User Not Authenticated
 
 
-security:
-  - BasicAuth:  []
-
+# security:
+#   - BasicAuth:  []
+# this global, override it in signup and login byt sercurity: [] at path level
 paths:
   /auth/signup:
     post:
@@ -119,12 +146,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/SignupOkResponse'
         400:
-          description: invalide user input
+          description: invalid user input
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SignupBadRequestResponse"
-  /aut/login:
+                anyOf:
+                  - $ref: "#/components/schemas/SignupBadRequestResponse1"
+                  - $ref: "#/components/schemas/SignupBadRequestResponse2"
+  /auth/login:
     post:
       tags:
         - User Authentication
@@ -136,12 +165,6 @@ paths:
             schema:
               $ref: '#/components/schemas/LoginRequest'
       responses:
-        400:
-          description: when user is trying to login while already authenticated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AlreadyAuthenticated'
         200:
           description: successfull login attempt
           content:

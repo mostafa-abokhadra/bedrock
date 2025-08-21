@@ -32,7 +32,7 @@ passport.use(
             return done(null, sanitizedUser, {message: "User Created Successfully"})
 
         } catch(error) {
-            return done(error, false, {message: "An Error has Occured",})
+            return done(error, false, {Message: "Server Error Occured", Error: error})
         }
     })
 )

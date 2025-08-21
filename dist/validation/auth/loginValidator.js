@@ -7,5 +7,5 @@ export const emailValidator = [
 ];
 export const passwordValidator = [
     body('password')
-        .not().isEmpty().withMessage('password field is required')
+        .not().isEmpty().withMessage('password is required')
 ];
