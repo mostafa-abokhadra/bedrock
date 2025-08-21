@@ -11,7 +11,7 @@ const router = express.Router()
 const swaggerDoc = YAML.load(path.resolve(__dirname, '../../src/docs/swagger.yaml'))
 
 router.use(
-    '/',
+    '/api-docs',
     swaggerUi.serve,
     swaggerUi.setup(swaggerDoc)
 )
