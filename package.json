@@ -32,9 +32,7 @@
     "passport-local": "^1.0.0",
     "redis": "^5.8.1",
     "swagger-cli": "^4.0.4",
-    "swagger-jsdoc": "^6.2.8",
-    "swagger-model-validator": "^3.0.21",
-    "swagger-ui-express": "^5.0.1",
+    "swagger-ui-express": "^4.6.2",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
@@ -44,7 +42,6 @@
     "@types/node": "^24.1.0",
     "@types/passport": "^1.0.17",
     "@types/passport-local": "^1.0.38",
-    "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.8",
     "@types/yamljs": "^0.2.34",
     "prisma": "^6.13.0",
