@@ -5,7 +5,7 @@ class loginController {
             if (err)
                 return res.status(500).json(info);
             if (!user)
-                return res.status(500).json(info);
+                return res.status(400).json(info);
             req.logIn(user, (err) => {
                 if (err)
                     return res.status(500).json({ "message": "can not login user" });

@@ -24,7 +24,7 @@ passport.use('local-login', new LocalStrategy({
         if (!validatePassword)
             return done(null, false, { Message: "Email or password is incorrect" });
         const sanitizedUser = await sanitizeUser(user.email);
-        return done(null, sanitizedUser);
+        return done(null, sanitizedUser, { Message: 'User logged in successfully' });
     }
     catch (error) {
         return done(error, false, { Message: "Server Error Occured", Error: error });
