@@ -18,7 +18,7 @@ server.use(passport.session())
 
 server.use('/auth', loginRoutes);
 server.use('/auth', signupRoutes);
-server.use('/', apiDocsRoute);
+server.use('/api-docs', apiDocsRoute);
 
 server.get('/', async (req, res) => {
     return res.send("<h1>Bedrock Home page 3</h1>");
