@@ -44,7 +44,7 @@ components:
           type: string
           example: mostafa@example.com
 
-    SignupBadRequestResponse1:
+    BadRequestResponse:
       type: object
       properties:
         errors:
@@ -54,7 +54,7 @@ components:
             properties:
               msg:
                 type: string
-                example: invalide Emali address
+                example: Emali address is required
               path:
                 type: string
                 example: email
@@ -66,7 +66,7 @@ components:
                 example: field
               value:
                 type: string
-                example: yourInvalideEmailValue@example.com
+                example: ''
 
     SignupBadRequestResponse2:
       type: object
@@ -107,13 +107,30 @@ components:
         message:
           type: string
           example: Already Authenticated
-
+    
     isAuthenticated:
       type: object
       properties:
         message:
           type: string
           example: User Not Authenticated
+    
+    ServerError1:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Server Error Occured
+        Error:
+          type: string
+          example: An Error message
+
+    ServerError2:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Can not Login user
 
 
 # security:
@@ -144,7 +161,7 @@ paths:
             application/json:
               schema:
                 anyOf:
-                  - $ref: "#/components/schemas/SignupBadRequestResponse1"
+                  - $ref: "#/components/schemas/BadRequestResponse"
                   - $ref: "#/components/schemas/SignupBadRequestResponse2"
         409:
           description: when user trying to Authenticate while already is Authenticated
@@ -152,6 +169,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AlreadyAuthenticated'
+        500:
+          description: when a server error occur or couldn't login user
+          content:
+            application/json:
+              schema:
+                anyOf:
+                  - $ref: '#/components/schemas/ServerError1'
+                  - $ref: '#/components/schemas/ServerError2'
   /auth/login:
     post:
       tags:
@@ -170,6 +195,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LoginOkResponse'
+        400:
+          description: invalid user inputs
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestResponse"
 
 
 
