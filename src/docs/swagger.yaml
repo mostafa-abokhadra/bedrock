@@ -209,7 +209,7 @@ paths:
               schema:
                 anyOf:
                   - $ref: "#/components/schemas/BadRequestResponse"
-                  - $ref: "#/components/schemas/BadRequestResponse"
+                  - $ref: "#/components/schemas/LoginBadRequest"
 
         409:
           description: when user try to authenticate while already is Authenticated
