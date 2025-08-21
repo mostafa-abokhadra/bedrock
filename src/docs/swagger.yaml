@@ -82,6 +82,18 @@ components:
         email:
           type: string
           example: validRegisteredEmail@example.com
+    AlreadyAuthenticated:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Already Authenticated
+    isAuthenticated:
+      type: object
+      properties:
+        message:
+          type: string
+          example: User Not Authenticated
 
 
 security:
@@ -124,6 +136,12 @@ paths:
             schema:
               $ref: '#/components/schemas/LoginRequest'
       responses:
+        400:
+          description: when user is trying to login while already authenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlreadyAuthenticated'
         200:
           description: successfull login attempt
           content:
