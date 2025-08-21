@@ -108,7 +108,7 @@ components:
           type: string
           example: Already Authenticated
     
-    isAuthenticated:
+    IsAuthenticated:
       type: object
       properties:
         message:
@@ -153,6 +153,19 @@ components:
           type: string
           example: logged out successfully
 
+    LogoutServerError1:
+      type: object
+      properties:
+        message: 
+          type: string
+          example: can not logout the user
+    
+    LogoutServerError2:
+      type: object
+      properties:
+        messge: 
+          type: string
+          example: Can not destory user session
 
 # security:
 #   - BasicAuth:  []
@@ -254,6 +267,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SuccessfulLogoutResponse'
+        403:
+          description: when user try to logout while not authenticated
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/IsAuthenticated'
+        500:
+          description: couldn't logout user or couldn't destroy the session
+          content:
+            application/json:
+              schema:
+                anyOf:
+                  - $ref: '#/components/schemas/LogoutServerError1'
+                  - $ref: '#/components/schemas/LogoutServerError2'
+
 # // Bearer: {
 # //     type: 'http',
 # //     schema: "bearer",
