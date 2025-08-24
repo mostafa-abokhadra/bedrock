@@ -6,6 +6,9 @@ const redisClient = createClient({
 redisClient.on("error", (err) => {
     console.log("Redis client error", err);
 });
+redisClient.on("connect", () => {
+    console.log("connected to redis");
+});
 await redisClient.connect();
 const sessionStore = new RedisStore({ client: redisClient });
 export default sessionStore;

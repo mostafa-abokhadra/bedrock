@@ -1,16 +1,21 @@
 import { createClient } from 'redis'
 import  {RedisStore}  from 'connect-redis'
 
-    const redisClient = createClient({
-        url: process.env.REDIS_SESSION_CACHE_URL
-    })
+export let redisConnected = true;
 
-    redisClient.on("error", (err) => {
-        console.log("Redis client error", err)
-    })
+const redisClient = createClient({
+    url: process.env.REDIS_SESSION_CACHE_URL
+})
+redisClient.on("error", () => {
+    redisConnected = false
+})
 
-    await redisClient.connect()
+redisClient.on("connect", () => {
+    redisConnected = true
+})
 
-    const  sessionStore = new RedisStore({client: redisClient});
+await redisClient.connect()
+
+const  sessionStore = new RedisStore({client: redisClient});
     
 export default sessionStore;
