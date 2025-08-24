@@ -166,6 +166,16 @@ components:
         messge: 
           type: string
           example: Can not destory user session
+    
+    FailedRedisConnection:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Authentication service unavailable. Please try again later."
+        redis: 
+          type: boolean
+          example: 'false'
 
 # security:
 #   - BasicAuth:  []
@@ -211,6 +221,12 @@ paths:
                   - $ref: '#/components/schemas/ServerError1'
                   - $ref: '#/components/schemas/ServerError2'
                   - $ref: "#/components/schemas/SignupCantCreateUserResponse"
+        503:
+          description: connection to redis session store Failed
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/FailedRedisConnection'
   /auth/login:
     post:
       tags:
@@ -254,7 +270,12 @@ paths:
                 anyOf:
                   - $ref: '#/components/schemas/ServerError1'
                   - $ref: '#/components/schemas/ServerError2'
-  
+        503:
+          description: connection to redis session store Failed
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/FailedRedisConnection'
   /auth/logout:
     post:
       tags:
