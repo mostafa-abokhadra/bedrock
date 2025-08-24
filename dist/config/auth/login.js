@@ -30,17 +30,3 @@ passport.use('local-login', new LocalStrategy({
         return done(error, false, { Message: "Server Error Occured", Error: error });
     }
 }));
-passport.serializeUser((user, done) => {
-    done(null, user.id);
-});
-passport.deserializeUser(async (id, done) => {
-    const user = await prisma.user.findUnique({
-        where: { id },
-        select: {
-            id: true,
-            email: true,
-            vaults: true
-        }
-    });
-    done(null, user);
-});
