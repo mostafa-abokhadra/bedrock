@@ -21,7 +21,12 @@ export const emailValidator = [
         }
     })
 ]
-
+function isAlphaNum(value: string) {
+    const isAlphanum = /^[a-z0-9]$/i.test(value);
+    if (isAlphanum)
+        return 1
+    return 0
+}
 export const passwordValidator = [
     body('password')
     .not().isEmpty().withMessage('Password is Required')
@@ -46,6 +51,13 @@ export const passwordValidator = [
                 return true
         }
         throw new Error('Must Contain at Least 1 Small Letter')
+    })
+    .custom((value) => {
+        for(let i =0; i < value.length; i++) {
+            if (!isAlphaNum(value[i]))
+                return true
+        }
+        throw new Error('must contain at least 1 special character')
     }),
 
     body('confirmPassword')
