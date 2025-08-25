@@ -16,6 +16,7 @@ redisClient.on("error", () => {
 redisClient.on("connect", () => {
     redisConnected = true
 })
+
 try {
     await redisClient.connect();
     redisConnected = true;
