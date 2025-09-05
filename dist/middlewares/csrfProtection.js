@@ -1,5 +1,5 @@
 import csurf from "csurf";
-const csrfProtection = csurf({ cookie: true });
+const csrfProtection = csurf();
 const csrfMiddleware = (req, res, next) => {
     csrfProtection(req, res, (err) => {
         if (err && err.code === 'EBADCSRFTOKEN') {
