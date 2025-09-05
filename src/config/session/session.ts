@@ -15,7 +15,8 @@ const sessionConfig: session.SessionOptions = {
     },
     resave: false,
     saveUninitialized: false,
-    store: sessionStore
+    store: sessionStore,
+    proxy: process.env.NODE_ENV === 'production'
 }
 
 export default session(sessionConfig);
