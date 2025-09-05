@@ -29,7 +29,8 @@ class loginController {
                     return res.status(500).json({"message": "can not destory the session"})
             })
 
-            res.clearCookie("bedrockCookie")
+            res.clearCookie("sessionId")
+            res.clearCookie("_csrf");
 
             return res.status(200).json({"message": "logged out successfully"})
         })
