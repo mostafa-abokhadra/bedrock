@@ -5,3 +5,4 @@ dist
 bedrock-yet.txt
 bedrockEnv.txt
 .vscode
+.gitignore

@@ -1,7 +1,7 @@
 import { Router } from "express";
-import csrf from "csurf";
 const router = Router();
-const csrfProtection = csrf({ cookie: true });
+import csrfProtection from "../../middlewares/csrfProtection.js";
+
 router.get('/csrf-token', csrfProtection, (req, res) => {
     return res.json({ csrfToken: req.csrfToken() });
 });
