@@ -11,7 +11,7 @@ const sessionConfig: session.SessionOptions = {
         maxAge: 24 * 60 * 60 * 1000,
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        // sameSite: 'strict'
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
     },
     resave: false,
     saveUninitialized: false,
