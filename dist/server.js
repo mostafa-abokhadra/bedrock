@@ -1,6 +1,5 @@
 import "dotenv/config";
 import express from "express";
-import cookieParser from "cookie-parser";
 import passport from "./config/auth/passport.js";
 import session from './config/session/session.js';
 import csrfMiddleware from "./middlewares/csrfProtection.js";
@@ -11,7 +10,6 @@ import signupRoutes from "./routes/auth/signupRoutes.js";
 import csrfRoutes from "./routes/auth/csrfRoute.js";
 const server = express();
 server.use(express.json());
-server.use(cookieParser());
 server.use(express.urlencoded({ extended: true }));
 server.use(session);
 server.use(passport.initialize());
