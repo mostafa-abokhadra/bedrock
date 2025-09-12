@@ -8,7 +8,6 @@ import checkRedisConnection from "../../middlewares/checkRedisConnection.js";
 const router = express.Router()
 import loginController from '../../controllers/auth/loginController.js'
 
-
 router.post(
     '/login',
     blockAuthenticatedUser,

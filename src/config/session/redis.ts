@@ -5,9 +5,6 @@ export let redisConnected = false;
 
 const redisClient = createClient({
     url: process.env.REDIS_SESSION_CACHE_URL,
-    socket: {
-        reconnectStrategy: false,
-    },
 })
 redisClient.on("error", () => {
     redisConnected = false
