@@ -1,7 +1,5 @@
 import session from "express-session";
-import dotenv from "dotenv";
 import sessionStore from './redis.js';
-dotenv.config();
 const sessionConfig = {
     name: process.env.SESSION_NAME,
     secret: process.env.SESSION_SECRET,
@@ -13,6 +11,7 @@ const sessionConfig = {
     },
     resave: false,
     saveUninitialized: false,
-    store: sessionStore
+    store: sessionStore,
+    proxy: process.env.NODE_ENV === 'production'
 };
 export default session(sessionConfig);

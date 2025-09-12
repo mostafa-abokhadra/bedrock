@@ -1,8 +1,5 @@
 import session from "express-session";
-import dotenv from "dotenv"
 import sessionStore from './redis.js'
-
-dotenv.config()
 
 const sessionConfig: session.SessionOptions = {
     name: process.env.SESSION_NAME!,
