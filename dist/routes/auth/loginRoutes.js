@@ -5,6 +5,6 @@ import { blockAuthenticatedUser, isAuthenticated } from "../../middlewares/sessi
 import checkRedisConnection from "../../middlewares/checkRedisConnection.js";
 const router = express.Router();
 import loginController from '../../controllers/auth/loginController.js';
-router.post('/login', blockAuthenticatedUser, checkRedisConnection, emailValidator, passwordValidator, handleValidationError, loginController.postLogin);
+router.post('/login', blockAuthenticatedUser, checkRedisConnection, emailValidator, passwordValidator, handleValidationError, loginController.loginUser);
 router.post('/logout', isAuthenticated, loginController.logout);
 export default router;

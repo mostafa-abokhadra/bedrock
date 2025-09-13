@@ -3,7 +3,7 @@ const prisma = new PrismaClient();
 
 export default class vaultController {
     static async createVault(req: any, res: any) {
-        const { name, data } = req.body;
+        const { name } = req.body;
 
         try { 
             const newVault = await prisma.vault.create({
@@ -11,7 +11,7 @@ export default class vaultController {
                     name,
                     createdAt: new Date(),
                     updatedAt: new Date(),
-                    userId: req.sessoin.userId,
+                    userId: req.user.id,
                 }
             });
             if (!newVault) {
