@@ -2,7 +2,7 @@ import passport from "../../config/auth/passport.js"
 import { IVerifyOptions } from "passport-local";
 
 class loginController {
-    static async postLogin(req: any , res: any , next: any) {
+    static async loginUser(req: any , res: any , next: any) {
 
         passport.authenticate(
             'local-login',
