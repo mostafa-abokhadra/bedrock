@@ -1,0 +1,333 @@
+openapi: 3.0.0
+info:
+  title: Bedrock APIs
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+  - url: https://bedrock-henna.vercel.app
+
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+  schemas:
+
+    SignupRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          example: mostafa@example.com
+        password:
+          type: string
+          example: strongPassword1#
+        confirmPassword:
+          type: string
+          example: strongPassword1#
+      required:
+        - email
+        - password
+        - confirmPassword
+
+    SignupOkResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: User Created Successfully
+        id:
+          type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
+        email:
+          type: string
+          example: mostafa@example.com
+
+    BadRequestResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              msg:
+                type: string
+                example: Emali address is required
+              path:
+                type: string
+                example: email
+              location:
+                type: string
+                example: body
+              type:
+                type: string
+                example: field
+              value:
+                type: string
+                example: ''
+
+    SignupCantCreateUserResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Can't Create User
+
+    LoginRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          example: validRegisteredEmail@example.com
+        password:
+          type: string
+          example: yourStrongPassword123#
+      required:
+        - email
+        - password
+
+    LoginOkResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: User logged in successfully
+        id:
+          type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
+        email:
+          type: string
+          example: validRegisteredEmail@example.com
+
+    AlreadyAuthenticated:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Already Authenticated
+    
+    IsAuthenticated:
+      type: object
+      properties:
+        message:
+          type: string
+          example: User Not Authenticated
+    
+    ServerError1:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Server Error Occured
+        Error:
+          type: string
+          example: An Error message
+
+    ServerError2:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Can not Login user
+    
+    LoginBadRequest:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Email or password is incorrect
+    
+    InvalidCredentailsMethod:
+      type: object
+      properties:
+        messgae:
+          type: string
+          example: This account uses Google login. Please sign in with Google.
+    
+    SuccessfulLogoutResponse:
+      type: object
+      properties:
+        messge: 
+          type: string
+          example: logged out successfully
+
+    LogoutServerError1:
+      type: object
+      properties:
+        message: 
+          type: string
+          example: can not logout the user
+    
+    LogoutServerError2:
+      type: object
+      properties:
+        messge: 
+          type: string
+          example: Can not destory user session
+    
+    FailedRedisConnection:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Authentication service unavailable. Please try again later."
+        redis: 
+          type: boolean
+          example: 'false'
+
+# security:
+#   - BasicAuth:  []
+# this global, override it in signup and login byt sercurity: [] at path level
+paths:
+  /auth/signup:
+    post:
+      tags:
+        - User Authentication
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignupRequest'
+      responses:
+        201:
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignupOkResponse'
+        400:
+          description: invalid user input
+          content:
+            application/json:
+              schema:
+                anyOf:
+                  - $ref: "#/components/schemas/BadRequestResponse"
+        409:
+          description: when user trying to Authenticate while already is Authenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlreadyAuthenticated'
+        500:
+          description: when a server error occur or couldn't login user
+          content:
+            application/json:
+              schema:
+                anyOf:
+                  - $ref: '#/components/schemas/ServerError1'
+                  - $ref: '#/components/schemas/ServerError2'
+                  - $ref: "#/components/schemas/SignupCantCreateUserResponse"
+        503:
+          description: connection to redis session store Failed
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/FailedRedisConnection'
+  /auth/login:
+    post:
+      tags:
+        - User Authentication
+      summary: Login the user in and creating a new session
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        200:
+          description: successfull login attempt
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginOkResponse'
+        400:
+          description: invalid user inputs
+          content:
+            application/json:
+              schema:
+                anyOf:
+                  - $ref: "#/components/schemas/BadRequestResponse"
+                  - $ref: "#/components/schemas/LoginBadRequest"
+                  - $ref: "#/components/schemas/InvalidCredentailsMethod"
+
+        409:
+          description: when user try to authenticate while already is Authenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlreadyAuthenticated'
+        
+        500:
+          description: when a server error occur or couldn't login user
+          content:
+            application/json:
+              schema:
+                anyOf:
+                  - $ref: '#/components/schemas/ServerError1'
+                  - $ref: '#/components/schemas/ServerError2'
+        503:
+          description: connection to redis session store Failed
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/FailedRedisConnection'
+  /auth/logout:
+    post:
+      tags:
+        - User Authentication
+      summary: logging out an authenticated user
+      responses:
+        200:
+          description: successfully logging out user, destroying session and clearing cookie
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessfulLogoutResponse'
+        403:
+          description: when user try to logout while not authenticated
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/IsAuthenticated'
+        500:
+          description: couldn't logout user or couldn't destroy the session
+          content:
+            application/json:
+              schema:
+                anyOf:
+                  - $ref: '#/components/schemas/LogoutServerError1'
+                  - $ref: '#/components/schemas/LogoutServerError2'
+  /auth/csrf-token:
+    get:
+      tags:
+        - User Authentication
+      summary: get csrf token
+      responses:
+        200:
+          description: successfully get csrf token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  csrfToken:
+                    type: string
+                    example: "a1b2c3d4e5f6g7h8i9j0"
+
+# // Bearer: {
+# //     type: 'http',
+# //     schema: "bearer",
+# //     bearFormat: "JWT",
+# //     description: "basic auth"
+# // },
+# apiKeyAuth: {
+# type: 'apiKey',
+# in: 'header',
+# name: 'google-api-key',
+# description: 'auth with google'
+# }

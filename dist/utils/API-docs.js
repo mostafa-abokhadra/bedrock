@@ -1,0 +1,11 @@
+import swaggerUi from 'swagger-ui-express';
+import express from 'express';
+import YAML from 'yamljs';
+import { fileURLToPath } from "url";
+import path from "path";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const router = express.Router();
+const swaggerDoc = YAML.load(path.resolve(__dirname, '../swagger.yaml'));
+router.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+export default router;
