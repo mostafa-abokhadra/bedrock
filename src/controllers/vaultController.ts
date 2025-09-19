@@ -20,7 +20,7 @@ export default class vaultController {
             return res.status(201).json({ message: "Vault created successfully", vault: newVault });
         } catch (error) {
             console.error("Error creating vault:", error);
-            return res.status(500).json({ message: "Internal server error" });  
+            return res.status(500).json({ message: "Internal server error", error: error });  
         }
     }
 }
