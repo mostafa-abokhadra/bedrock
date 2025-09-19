@@ -5,5 +5,5 @@ import { emailValidator, passwordValidator } from "../../validation/auth/signupV
 import handleValidationError from "../../middlewares/handleValidationErrors.js";
 import signupController from "../../controllers/auth/signupController.js";
 const router = express.Router();
-router.post('/signup', blockAuthenticatedUser, checkRedisConnection, emailValidator, passwordValidator, handleValidationError, signupController.postSignup);
+router.post('/signup', blockAuthenticatedUser, checkRedisConnection, emailValidator, passwordValidator, handleValidationError, signupController.createNewUser);
 export default router;

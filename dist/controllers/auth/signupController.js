@@ -1,6 +1,6 @@
 import passport from "../../config/auth/passport.js";
 class signupController {
-    static async postSignup(req, res, next) {
+    static async createNewUser(req, res, next) {
         passport.authenticate('local-signup', (err, user, info) => {
             if (err)
                 return res.status(500).json(info);

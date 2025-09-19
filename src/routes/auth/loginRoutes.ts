@@ -15,7 +15,7 @@ router.post(
     emailValidator,
     passwordValidator,
     handleValidationError,
-    loginController.postLogin
+    loginController.loginUser
 );
 
 router.post(

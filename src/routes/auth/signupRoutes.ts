@@ -15,7 +15,7 @@ router.post(
     emailValidator,
     passwordValidator,
     handleValidationError,
-    signupController.postSignup
+    signupController.createNewUser
 )
 
 export default router;
