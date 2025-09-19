@@ -46,7 +46,7 @@ model User {
   id       String  @id @default(uuid())
   email    String  @unique
   password String?
-  vaults   Vault?  @relation("UserVault")
+  vaults   Vault[]  @relation("UserVault")
 }
 
 model Vault {
@@ -54,7 +54,7 @@ model Vault {
   name      String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  userId    String   @unique
+  userId    String   
   files     File[]
   folders   Folder[]
   user      User     @relation("UserVault", fields: [userId], references: [id], onDelete: Cascade)
