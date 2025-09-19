@@ -1,6 +1,6 @@
 import passport from "../../config/auth/passport.js";
 class loginController {
-    static async postLogin(req, res, next) {
+    static async loginUser(req, res, next) {
         passport.authenticate('local-login', (err, user, info) => {
             if (err)
                 return res.status(500).json(info);
