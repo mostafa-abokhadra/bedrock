@@ -1,0 +1,11 @@
+"use strict";
+exports.__esModule = true;
+var express_1 = require("express");
+var sessionManage_js_1 = require("../../middlewares/sessionManage.js");
+var checkRedisConnection_js_1 = require("../../middlewares/checkRedisConnection.js");
+var signupValidator_js_1 = require("../../validation/auth/signupValidator.js");
+var handleValidationErrors_js_1 = require("../../middlewares/handleValidationErrors.js");
+var signupController_js_1 = require("../../controllers/auth/signupController.js");
+var router = express_1["default"].Router();
+router.post('/signup', sessionManage_js_1.blockAuthenticatedUser, checkRedisConnection_js_1["default"], signupValidator_js_1.emailValidator, signupValidator_js_1.passwordValidator, handleValidationErrors_js_1["default"], signupController_js_1["default"].createNewUser);
+exports["default"] = router;

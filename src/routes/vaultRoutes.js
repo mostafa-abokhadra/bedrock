@@ -1,0 +1,12 @@
+"use strict";
+exports.__esModule = true;
+var express_1 = require("express");
+var sessionManage_js_1 = require("../middlewares/sessionManage.js");
+var csrfProtection_js_1 = require("../middlewares/csrfProtection.js");
+var vaultController_js_1 = require("../controllers/vaultController.js");
+var vaultValidator_js_1 = require("../validation/vaultValidator.js");
+var handleValidationErrors_js_1 = require("../middlewares/handleValidationErrors.js");
+var router = express_1["default"].Router();
+router.post('/vaults', sessionManage_js_1.isAuthenticated, csrfProtection_js_1["default"], vaultValidator_js_1.nameValidator, handleValidationErrors_js_1["default"], vaultController_js_1["default"].createVault);
+exports["default"] = router;
+;
