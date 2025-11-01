@@ -1,0 +1,10 @@
+import express from "express";
+import { emailValidator, passwordValidator } from "../../validation/auth/loginValidator.js";
+import handleValidationError from "../../middlewares/handleValidationErrors.js";
+import { blockAuthenticatedUser, isAuthenticated } from "../../middlewares/sessionManage.js";
+import checkRedisConnection from "../../middlewares/checkRedisConnection.js";
+const router = express.Router();
+import loginController from '../../controllers/auth/loginController.js';
+router.post('/login', blockAuthenticatedUser, checkRedisConnection, emailValidator, passwordValidator, handleValidationError, loginController.loginUser);
+router.post('/logout', isAuthenticated, loginController.logout);
+export default router;
