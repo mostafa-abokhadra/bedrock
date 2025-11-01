@@ -41,3 +41,5 @@ server.get('/', async (req, res) => {
 server.listen(process.env.PORT, () => {
     console.log(`listening to ${process.env.PORT}`);
 })
+
+export default server;
