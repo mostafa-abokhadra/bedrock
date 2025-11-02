@@ -15,7 +15,7 @@ export default class vaultController {
                 }
             });
             if (!newVault) {
-                return res.status(400).json({ message: "Failed to create vault" });
+                return res.status(400).json({ message: "vault creation failed" });
             }
             return res.status(201).json({ message: "Vault created successfully", vault: newVault });
         } catch (error) {

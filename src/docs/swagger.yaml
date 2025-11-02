@@ -361,8 +361,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/successfullVaultCreation'
-
-
+        400:
+          description: vault creation Failed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: vault creation failed
 # // Bearer: {
 # //     type: 'http',
 # //     schema: "bearer",
