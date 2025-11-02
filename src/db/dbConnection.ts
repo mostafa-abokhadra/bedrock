@@ -1,7 +1,10 @@
 import mongoose from "mongoose";
 
-try {
-    await mongoose.connect(process.env.MONGODB_CONNECTION!)
-} catch(error) {
-    console.log("Error has Occured", error)
+export async function connectDb () {
+    try {
+        await mongoose.connect(process.env.MONGODB_CONNECTION!)
+    } catch(error) {
+        console.log("mongo connection failed", error)
+        process.exit(1)
+    }
 }

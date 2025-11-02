@@ -3,7 +3,7 @@ import {Strategy as LocalStrategy} from 'passport-local'
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt"
 import { sanitizeUser } from "../../utils/userUtils.js";
-
+import { User } from "../../models/user.model.js";
 const prisma = new PrismaClient()
 
 passport.use(
@@ -23,7 +23,13 @@ passport.use(
                     password: hashPassword
                 }
             })
-
+        
+            try {
+            const mongoUser = await User.create({email, password: hashPassword})
+            console.log("raw mongoUser", mongoUser)
+            } catch(err) {
+                console.log("mongo err", err)
+            }
             if (!user)
                 return done(null, false, {message: `Can't Create User`})
 
