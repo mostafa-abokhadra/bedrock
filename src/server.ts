@@ -1,6 +1,7 @@
 import "dotenv/config";
 import cors from "cors";
 import express from "express";
+import './db/dbConnection.js'
 
 import passport from "./config/auth/passport.js";
 import session from './config/session/session.js'

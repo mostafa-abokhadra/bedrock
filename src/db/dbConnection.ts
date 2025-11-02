@@ -1,0 +1,7 @@
+import mongoose from "mongoose";
+
+try {
+    await mongoose.connect(process.env.MONGODB_CONNECTION!)
+} catch(error) {
+    console.log("Error has Occured", error)
+}
