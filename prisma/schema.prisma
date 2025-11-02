@@ -8,34 +8,34 @@ datasource db {
 }
 
 model Metadata {
-  id      Int      @id @default(autoincrement())
+  id      String      @id @default(uuid())
   indices String[]
   tags    String[]
-  fileId  Int?     @unique
+  fileId  String?     @unique
   file    File?    @relation(fields: [fileId], references: [id], onDelete: Cascade)
 }
 
 model File {
-  id        Int           @id @default(autoincrement())
+  id        String        @id @default(uuid())
   createdAt DateTime      @default(now())
   updatedAt DateTime      @updatedAt
   access    Accessibility @default(PRIVATE)
   title     String        @unique
   content   String
-  parentId  Int?          @unique
-  vaultId   Int
+  parentId  String?          @unique
+  vaultId   String
   parent    Folder?       @relation(fields: [parentId], references: [id], onDelete: Cascade)
   vault     Vault         @relation(fields: [vaultId], references: [id], onDelete: Cascade)
   search    Metadata?
 }
 
 model Folder {
-  id        Int      @id @default(autoincrement())
+  id        String      @id @default(uuid())
   name      String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  parentId  Int?     @unique
-  vaultId   Int
+  parentId  String?     @unique
+  vaultId   String
   files     File?
   parent    Folder?  @relation("FolderHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
   folders   Folder?  @relation("FolderHierarchy")
@@ -50,7 +50,7 @@ model User {
 }
 
 model Vault {
-  id        Int      @id @default(autoincrement())
+  id        String      @id @default(uuid())
   name      String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
