@@ -371,6 +371,13 @@ paths:
                   message:
                     type: string
                     example: vault creation failed
+        500:
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError1'
+
 # // Bearer: {
 # //     type: 'http',
 # //     schema: "bearer",
