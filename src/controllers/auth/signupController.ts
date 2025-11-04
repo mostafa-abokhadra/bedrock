@@ -6,14 +6,14 @@ class signupController {
 
         passport.authenticate(
             'local-signup',
-            (err: any, user: object, info: IVerifyOptions) => {
+            (err: any, user: object, message: IVerifyOptions) => {
 
-                if (err) return res.status(500).json(info);
-                if (!user) return res.status(500).json(info);
+                if (err) return res.status(500).json(message);
+                if (!user) return res.status(500).json(message);
 
                 req.logIn(user, (err: any) => {
                     if (err) return res.status(500).json({"message": `Can not Login user`});
-                    return res.status(201).json({...info, user: user});
+                    return res.status(201).json({...message, user: user});
                 })
                 
         })(req, res, next)
