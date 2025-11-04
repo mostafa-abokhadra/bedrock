@@ -1,20 +1,17 @@
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient()
+import { User } from "../models/user.model.js";
 
 export async function sanitizeUser(email: string) {
     try {
-        const user = await prisma.user.findUnique({
-            where: {email},
-            select: {
-                id: true,
-                email: true
-            }
-        })
+        const user = await User.findOne({email}).select("id email")
+        if (!user)
+            return null
         return user;
     } catch(error) {
-        return {
-            "info": "An error has occured while sanitizing user",
-            error: error
-        }
+        // log the  error below
+        // return {
+        //     "message": "An error has occured while sanitizing user",
+        //     error: error
+        // }
+        return null
     }
 }

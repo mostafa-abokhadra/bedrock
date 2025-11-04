@@ -1,10 +1,8 @@
 import passport from "passport";
 import {Strategy as LocalStrategy} from 'passport-local'
-import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt"
 import { sanitizeUser } from "../../utils/userUtils.js";
-
-const prisma = new PrismaClient()
+import { User } from "../../models/user.model.js";
 
 passport.use(
     'local-signup',
@@ -14,24 +12,15 @@ passport.use(
     },
     async (email, password, done: any) => {
         try {
-
-            const hashPassword = await bcrypt.hash(password, Number(process.env.HASH_SALT!))
-
-            const user = await prisma.user.create({
-                data: {
-                    email: email,
-                    password: hashPassword
-                }
-            })
-
-            if (!user)
-                return done(null, false, {message: `Can't Create User`})
-
-            const sanitizedUser = await sanitizeUser(user.email)
+            const hashPassword = await bcrypt.hash(password, Number(process.env.HASH_SALT!))          
+            const newUser = await User.create({email, password: hashPassword})
+            const sanitizedUser = await sanitizeUser(newUser.email)
+            if (!sanitizedUser)
+                return done(true, false, {message: "coudn't sanitize user"})
             return done(null, sanitizedUser, {message: "User Created Successfully"})
-
         } catch(error) {
-            return done(error, false, {Message: "Server Error Occured", Error: error})
+            // log errors from brypt or create()
+            return done(error, false, {message: "Server Error Occured", error: error})
         }
     })
 )

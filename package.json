@@ -30,12 +30,13 @@
     "express": "^5.1.0",
     "express-session": "^1.18.2",
     "express-validator": "^7.2.1",
+    "mongoose": "^8.19.2",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
     "redis": "^5.8.1",
     "swagger-cli": "^4.0.4",
     "swagger-ui-express": "^4.6.2",
-    "vercel": "^41.7.8",
+    "vercel": "^41.0.2",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
