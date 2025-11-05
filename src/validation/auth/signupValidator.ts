@@ -1,6 +1,5 @@
 import {body} from "express-validator"
-import { PrismaClient } from "@prisma/client"
-const prisma = new PrismaClient()
+import { User } from "../../models/user.model.js"
 
 export const emailValidator = [
     body('email')
@@ -10,9 +9,7 @@ export const emailValidator = [
     .normalizeEmail()
     .custom(async (email) => {
         try {
-            const isRegistered = await prisma.user.findUnique({
-                where: {email}
-            })
+            const isRegistered = await User.findOne({email})
             if (!isRegistered)
                 return true
             throw new Error("User is already Registered")
