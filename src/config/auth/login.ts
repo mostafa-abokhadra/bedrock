@@ -1,10 +1,8 @@
 import passport from "passport"
 import {Strategy as LocalStrategy} from "passport-local"
-import { PrismaClient } from "@prisma/client"
 import bcrypt from "bcrypt"
 import { sanitizeUser } from "../../utils/userUtils.js"
-
-const prisma = new PrismaClient()
+import { User } from "../../models/user.model.js"
 
 passport.use(
     'local-login',
@@ -14,10 +12,8 @@ passport.use(
     },
     async (email: string, password: any, done: any) => {
         try {
+            const user = await User.findOne({email})
 
-            const user = await prisma.user.findUnique({
-                where: {email},
-            })
             if (!user) {
                 return done(null, false, {Message: "Email or password is incorrect"})
             }
@@ -26,14 +22,16 @@ passport.use(
                 return done(null, false, {
                     message: "This account uses Google login. Please sign in with Google.",
                 });
+                // add: provider, googleId, picture fields in user schema
             }
 
             const validatePassword = await bcrypt.compare(password, user.password)
-
             if (!validatePassword)
                 return done(null, false, {Message: "Email or password is incorrect"});
 
             const sanitizedUser = await sanitizeUser(user.email)
+            if (!sanitizeUser)
+                return done(true, false, {message: "coudn't sanitize user"})
 
             return done(null, sanitizedUser, {Message: 'User logged in successfully'})
 
