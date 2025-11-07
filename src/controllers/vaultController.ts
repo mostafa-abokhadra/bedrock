@@ -4,12 +4,10 @@ export default class vaultController {
     static async createVault(req: any, res: any) {
         const { name } = req.body;
         try { 
-            console.log(req.user)
             const newVault = await Vault.create({name, author: req.user._id})
             if (!newVault) {
                 return res.status(400).json({ message: "vault creation failed" });
             }
-            console.log("the new vault", newVault)
             const updateUserVaults = await User.findByIdAndUpdate(
                 req.user._id,
                 { $addToSet: { vaults: newVault._id}},
@@ -17,7 +15,6 @@ export default class vaultController {
             )
             return res.status(201).json({ message: "Vault created successfully", vault: newVault });
         } catch (error) {
-            console.log(error)
             return res.status(500).json({ message: "Internal server error", error: error });  
         }
     }
