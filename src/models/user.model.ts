@@ -10,10 +10,7 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    createdAt: {
-        type: Date,
-        default: Date.now()
-    },
-})
+    vaults: [{type: Schema.Types.ObjectId, ref: "Vault"}]
+}, {timestamps: true})
 export type UserType = InferSchemaType<typeof userSchema>
 export const User = model<UserType>("User", userSchema)
