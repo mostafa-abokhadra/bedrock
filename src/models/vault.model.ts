@@ -1,11 +1,7 @@
 import {Schema, model, InferSchemaType} from "mongoose"
 
 const vaultScehma = new Schema({
-    name: {
-        type: String,
-        required: true,
-        unique: true
-    },
+    name: { type: String, required: true, unique: true },
     author: {type: Schema.Types.ObjectId, ref: "User"}
 }, {timestamps: true})
 
