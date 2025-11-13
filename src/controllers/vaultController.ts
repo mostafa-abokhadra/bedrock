@@ -15,8 +15,8 @@ export default class vaultController {
                 {new: true}
             )
             return res.status(201).json({ message: "Vault created successfully", vault: newVault });
-        } catch (error) {
-            return res.status(500).json({ message: "Internal server error", error: error });  
+        } catch (error: any) {
+                return res.status(500).json({ message: "Internal server error", error: error.errmsg })
         }
     }
     static async getVaults(req: any, res: any) {
@@ -31,5 +31,22 @@ export default class vaultController {
             return res.status(500).json({message: "server errro occured"})
         }
     }
+        static async updateVault(req: any, res: any) {
+        try {
+            const {oldName, newName} = req.body
+            const updatedVault = await Vault.findOneAndUpdate(
+                { name: oldName, author: req.user._id },
+                { name: newName},
+                {new: true}
+            )
+            if (!updatedVault)
+                return res.status(200).json({message: "can't find vault"})
+            return res.status(200).json({message: "vault updated successfully", vault: updatedVault})
+        } catch(error) {
+            console.log(error)
+            return res.status(500).json({message: "an error has occured"})
+        }
+    }
+
 }
 
