@@ -47,6 +47,19 @@ export default class vaultController {
             return res.status(500).json({message: "an error has occured"})
         }
     }
-
+    static async deleteVault(req: any, res: any) {
+        try {
+            const {name} = req.body
+            const deletedVault = await Vault.deleteOne(
+                {name: name, author: req.user._id}
+            )
+            if (deletedVault.deletedCount === 0)
+                return res.status(200).json({message: "vault doesn't exist"})
+            return res.status(200).json({message: "vault deleted successfully"})
+        } catch(error) {
+            console.log("delete error", error)
+            return res.status(500).json({message: "server Error occured"})
+        }
+    }
 }
 
