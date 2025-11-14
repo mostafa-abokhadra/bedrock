@@ -31,4 +31,12 @@ router.put(
     handleValidationError,
     vaultController.updateVault
 )
+router.delete(
+    '/vaults',
+    isAuthenticated,
+    csrfMiddleware,
+    nameValidator,
+    handleValidationError,
+    vaultController.deleteVault
+)
 export default router;;
