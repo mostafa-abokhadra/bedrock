@@ -233,12 +233,19 @@ components:
         vault:
           $ref: '#/components/schemas/Vault'
     
-    successfullUpdateOfVault2:
+    vaultDoesnontExist:
       type: object
       properties:
         message:
           type: string
-          example: can't find the vault
+          example: vault doesn't exist
+    
+    successfullDeleteOfVault:
+      type: object
+      properties:
+        message:
+          type: string
+          example: vault deleted successfully
 
 paths:
   /auth/signup:
@@ -461,13 +468,43 @@ paths:
               schema:
                 anyOf:
                   - $ref: '#/components/schemas/successfullUpdateOfVault1'
-                  - $ref: '#/components/schemas/successfullUpdateOfVault2'
+                  - $ref: '#/components/schemas/vaultDoesnontExist'
         500:
           description: server error Occured
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError1'
+    delete:
+      tags:
+        - Vault APIs
+      summary: delete a user vault
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: vault name to be deleted
+      responses:
+        200:
+          description: delete a user vault successfully
+          content:
+            application/json:
+              schema:
+                anyOf:
+                  - $ref: '#/components/schemas/successfullDeleteOfVault'
+                  - $ref: '#/components/schemas/vaultDoesnontExist'
+        500:
+          description: server error Occured
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError1'
+
         
 # // Bearer: {
 # //     type: 'http',
