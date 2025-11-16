@@ -175,7 +175,28 @@ components:
         redis: 
           type: boolean
           example: 'false'
-    
+    Vault:
+      type: object
+      properties:
+        name: 
+          type: string
+          example: my vault name
+        author:
+          type: string
+          example: 6917178154e6263364b7b104
+        _id:
+          type: string
+          example: 6917202776ff9538772eb48a
+        createdAt:
+          type: string
+          example: 2025-11-14T12:27:19.715Z
+        updatedAt:
+          type: string
+          example: 2025-11-14T12:27:19.715Z
+        __v:
+          type: number
+          example: 0
+        
     successfullVaultCreation:
       type: object
       properties:
@@ -183,28 +204,7 @@ components:
           type: string
           example: Vault created successfully
         vault:
-          type: object
-          properties:
-            _id:
-              type: string
-              example: f032ee76-30d7-4b1a-8076-34cba6ff954d
-            name:
-              type: string
-              example: vault name
-            createdAt:
-              type: string
-              format: date-time
-              example: 2025-11-02T19:32:04.413Z
-            updatedAt:
-              type: string
-              format: date-time
-              example: 2025-11-02T19:32:04.413Z
-            author:
-              type: string
-              example: Ufs0e3r2Iede76-30d7-4b1a-8076-34cba6ff954d
-            __v:
-              type: number
-              example: 0
+          $ref: '#/components/schemas/Vault'
 
     successfullretrievalOfVaults2:
       type: object
@@ -222,29 +222,23 @@ components:
         vaults:
           type: array
           items:
-            type: object
-            properties:
-              vaults:
-                type: object
-                properties:
-                  name: 
-                    type: string
-                    example: my vault name
-                  author:
-                    type: string
-                    example: 6917178154e6263364b7b104
-                  _id:
-                    type: string
-                    example: 6917202776ff9538772eb48a
-                  createdAt:
-                    type: string
-                    example: 2025-11-14T12:27:19.715Z
-                  updatedAt:
-                    type: string
-                    example: 2025-11-14T12:27:19.715Z
-                  __v:
-                    type: number
-                    example: 0
+            $ref: '#/components/schemas/Vault'
+    
+    successfullUpdateOfVault1:
+      type: object
+      properties:
+        message:
+          type: string
+          example: vault updated successfully
+        vault:
+          $ref: '#/components/schemas/Vault'
+    
+    successfullUpdateOfVault2:
+      type: object
+      properties:
+        message:
+          type: string
+          example: can't find the vault
 
 paths:
   /auth/signup:
@@ -441,7 +435,40 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError1' 
-
+    put:
+      tags:
+        - Vault APIs
+      summary: updating vault name
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                oldName:
+                  type: string
+                  example: old vault name
+                newName:
+                  type: string
+                  example: new vault name
+      responses:
+      responses:
+        200:
+          description: vault updated Successfully
+          content:
+            application/josn:
+              schema:
+                anyOf:
+                  - $ref: '#/components/schemas/successfullUpdateOfVault1'
+                  - $ref: '#/components/schemas/successfullUpdateOfVault2'
+        500:
+          description: server error Occured
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError1'
+        
 # // Bearer: {
 # //     type: 'http',
 # //     schema: "bearer",
