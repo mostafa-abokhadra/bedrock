@@ -37,7 +37,7 @@ export default class vaultController {
             const updatedVault = await Vault.findOneAndUpdate(
                 { name: oldName, author: req.user._id },
                 { name: newName},
-                {new: true}
+                {new: true, runValidators: true}
             )
             if (!updatedVault)
                 return res.status(200).json({message: "can't find vault"})
