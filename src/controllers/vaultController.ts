@@ -1,5 +1,6 @@
 import { Vault } from "../models/vault.model.js";
 import { User } from "../models/user.model.js";
+import mongoose from "mongoose";
 
 export default class vaultController {
     static async createVault(req: any, res: any) {
@@ -48,16 +49,35 @@ export default class vaultController {
         }
     }
     static async deleteVault(req: any, res: any) {
+        const session = await mongoose.startSession()
+
         try {
+            session.startTransaction()
             const {name} = req.body
-            const deletedVault = await Vault.deleteOne(
-                {name: name, author: req.user._id}
+
+            const vault = await Vault.findOne({name, author: req.user._id}).session(session)
+
+            if (!vault) {
+                await session.abortTransaction()
+                session.endSession()
+                return res.status(404).json({message: "vault doesn't exist"})
+            }
+            const deletedVault = await Vault.deleteOne({_id: vault._id})
+
+            await User.updateOne(
+                {_id: req.user._id},
+                {$pull: {vaults:  vault._id}},
+                {session}
             )
-            if (deletedVault.deletedCount === 0)
-                return res.status(200).json({message: "vault doesn't exist"})
+
+            await session.commitTransaction()
+            session.endSession()
+            
             return res.status(200).json({message: "vault deleted successfully"})
         } catch(error) {
-            console.log("delete error", error)
+            console.log("an error occured while deleting vault", error)
+            await session.abortTransaction()
+            session.endSession()
             return res.status(500).json({message: "server Error occured"})
         }
     }
