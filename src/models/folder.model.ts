@@ -8,5 +8,6 @@ const folderSchema = new Schema({
 }, {timestamps: true})
 
 folderSchema.index({parent: 1, parentType: 1, name: 1}, {unique: true})
+
 export type folderType = InferSchemaType<typeof folderSchema>
 export const Folder = model<folderType>("Folder", folderSchema)
