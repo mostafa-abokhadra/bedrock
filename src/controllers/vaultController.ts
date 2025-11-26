@@ -96,7 +96,7 @@ export default class vaultController {
             if (!vault)
                 return res.status(404).json({message: "vault doesn't exist"})
             
-            const deletedVault = await Vault.deleteOne({_id: vault._id}).session(session)
+            const deletedVault = await Vault.findOneAndDelete({_id: vault._id}).session(session)
 
             await User.updateOne(
                 {_id: req.user._id},
