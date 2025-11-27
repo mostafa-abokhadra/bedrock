@@ -114,6 +114,13 @@ components:
           type: string
           example: User Not Authenticated
     
+    invalidCSRFtoken:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Invalid CSRF Token
+    
     ServerError1:
       type: object
       properties:
@@ -405,7 +412,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/isNotAuthenticated'
+                anyOf:
+                  - $ref: '#/components/schemas/isNotAuthenticated'
+                  - $ref: '#/components/schemas/invalidCSRFtoken'
         201:
           description: new vault was created successfully
           content:
