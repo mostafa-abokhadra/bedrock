@@ -409,6 +409,7 @@ paths:
       responses:
         403:
           description: when user try to make authenticated operation while not authenticated
+            or user sent an invalid csrf token
           content:
             application/json:
               schema:
@@ -484,10 +485,14 @@ paths:
       responses:
         403:
           description: when user try to make authenticated operation while not authenticated
+            or user sent invalid csrf token
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/isNotAuthenticated'
+                anyOf:
+                  - $ref: '#/components/schemas/isNotAuthenticated'
+                  - $ref: '#/components/schemas/invalidCSRFtoken'
+          
         200:
           description: vault updated Successfully
           content:
@@ -519,10 +524,13 @@ paths:
       responses:
         403:
           description: when user try to make authenticated operation while not authenticated
+            or sent invalide csrf token
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/isNotAuthenticated'
+                anyOf:
+                  - $ref: '#/components/schemas/isNotAuthenticated'
+                  - $ref: '#/components/schemas/invalidCSRFtoken'
         
         200:
           description: delete a user vault successfully
