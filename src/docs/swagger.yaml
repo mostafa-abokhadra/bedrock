@@ -12,6 +12,17 @@ components:
     BasicAuth:
       type: http
       scheme: basic
+    
+  parameters:
+    CSRFtokenHeader:
+      name: csrf-token
+      in: header
+      required: true
+      description: token value returned from /auth/csrf-token GET
+      schema:
+        type: string
+        example: "m41rAslv-vdpVvLNjoO2SzHLugWvh3kclJXc"
+
   schemas:
     SignupRequest:
       type: object
@@ -395,7 +406,9 @@ paths:
     post:
       tags:
         - Vault APIs
-      summary: create new vault
+      summary: to create a new vault
+      parameters: 
+        - $ref: '#/components/parameters/CSRFtokenHeader'
       requestBody:
         required: true
         content:
@@ -469,6 +482,8 @@ paths:
       tags:
         - Vault APIs
       summary: updating vault name
+      parameters: 
+        - $ref: '#/components/parameters/CSRFtokenHeader'
       requestBody:
         required: true
         content:
@@ -511,6 +526,8 @@ paths:
       tags:
         - Vault APIs
       summary: delete a user vault
+      parameters: 
+        - $ref: '#/components/parameters/CSRFtokenHeader'
       requestBody:
         required: true
         content: 
