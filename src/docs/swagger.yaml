@@ -107,7 +107,7 @@ components:
           type: string
           example: Already Authenticated
     
-    IsAuthenticated:
+    isNotAuthenticated:
       type: object
       properties:
         message:
@@ -359,7 +359,7 @@ paths:
           content:
             application/json:
               schema: 
-                $ref: '#/components/schemas/IsAuthenticated'
+                $ref: '#/components/schemas/isNotAuthenticated'
         500:
           description: couldn't logout user or couldn't destroy the session
           content:
@@ -400,6 +400,12 @@ paths:
                   type: string
                   example: vault name
       responses:
+        403:
+          description: when user try to make authenticated operation while not authenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/isNotAuthenticated'
         201:
           description: new vault was created successfully
           content:
@@ -427,6 +433,13 @@ paths:
         - Vault APIs
       summary: getting all user vaults
       responses:
+        403:
+          description: when user try to make authenticated operation while not authenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/isNotAuthenticated'
+
         200:
           description: successfull retrieval of vaults
           content:
@@ -460,7 +473,12 @@ paths:
                   type: string
                   example: new vault name
       responses:
-      responses:
+        403:
+          description: when user try to make authenticated operation while not authenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/isNotAuthenticated'
         200:
           description: vault updated Successfully
           content:
@@ -490,6 +508,13 @@ paths:
                   type: string
                   example: vault name to be deleted
       responses:
+        403:
+          description: when user try to make authenticated operation while not authenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/isNotAuthenticated'
+        
         200:
           description: delete a user vault successfully
           content:
