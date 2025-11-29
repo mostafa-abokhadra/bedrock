@@ -1,0 +1,25 @@
+post:
+  tags:
+    - User Authentication
+  summary: logging out an authenticated user
+  responses:
+    200:
+      description: successfully logging out user, destroying session and clearing cookie
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SuccessfulLogoutResponse'
+    403:
+      description: when user try to logout while not authenticated
+      content:
+        application/json:
+          schema: 
+            $ref: '#/components/schemas/isNotAuthenticated'
+    500:
+      description: couldn't logout user or couldn't destroy the session
+      content:
+        application/json:
+          schema:
+            anyOf:
+              - $ref: '#/components/schemas/LogoutServerError1'
+              - $ref: '#/components/schemas/LogoutServerError2'

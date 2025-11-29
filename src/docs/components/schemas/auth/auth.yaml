@@ -1,0 +1,169 @@
+# SignupRequest:
+#   type: object
+#   properties:
+#     email:
+#       type: string
+#       example: mostafa@example.com
+#     password:
+#       type: string
+#       example: strongPassword1#
+#     confirmPassword:
+#       type: string
+#       example: strongPassword1#
+#   required:
+#     - email
+#     - password
+#     - confirmPassword
+
+SignupOkResponse:
+  type: object
+  properties:
+    message:
+      type: string
+      example: User Created Successfully
+    id:
+      type: string
+      example: 123e4567-e89b-12d3-a456-426614174000
+    email:
+      type: string
+      example: mostafa@example.com
+
+BadRequestResponse:
+  type: object
+  properties:
+    errors:
+      type: array
+      items:
+        type: object
+        properties:
+          msg:
+            type: string
+            example: Emali address is required
+          path:
+            type: string
+            example: email
+          location:
+            type: string
+            example: body
+          type:
+            type: string
+            example: field
+          value:
+            type: string
+            example: ''
+
+SignupCantCreateUserResponse:
+  type: object
+  properties:
+    message:
+      type: string
+      example: Can't Create User
+
+LoginRequest:
+  type: object
+  properties:
+    email:
+      type: string
+      example: validRegisteredEmail@example.com
+    password:
+      type: string
+      example: yourStrongPassword123#
+  required:
+    - email
+    - password
+
+LoginOkResponse:
+  type: object
+  properties:
+    message:
+      type: string
+      example: User logged in successfully
+    id:
+      type: string
+      example: 123e4567-e89b-12d3-a456-426614174000
+    email:
+      type: string
+      example: validRegisteredEmail@example.com
+
+AlreadyAuthenticated:
+  type: object
+  properties:
+    message:
+      type: string
+      example: Already Authenticated
+
+isNotAuthenticated:
+  type: object
+  properties:
+    message:
+      type: string
+      example: User Not Authenticated
+
+invalidCSRFtoken:
+  type: object
+  properties:
+    message:
+      type: string
+      example: Invalid CSRF Token
+
+ServerError1:
+  type: object
+  properties:
+    message:
+      type: string
+      example: Server Error Occured
+    Error:
+      type: string
+      example: An Error message
+
+ServerError2:
+  type: object
+  properties:
+    message:
+      type: string
+      example: Can not Login user
+
+LoginBadRequest:
+  type: object
+  properties:
+    message:
+      type: string
+      example: Email or password is incorrect
+
+InvalidCredentailsMethod:
+  type: object
+  properties:
+    message:
+      type: string
+      example: This account uses Google login. Please sign in with Google.
+
+SuccessfulLogoutResponse:
+  type: object
+  properties:
+    message: 
+      type: string
+      example: logged out successfully
+
+LogoutServerError1:
+  type: object
+  properties:
+    message: 
+      type: string
+      example: can not logout the user
+
+LogoutServerError2:
+  type: object
+  properties:
+    message: 
+      type: string
+      example: Can not destroy user session
+
+FailedRedisConnection:
+  type: object
+  properties:
+    message:
+      type: string
+      example: "Authentication service unavailable. Please try again later."
+    redis: 
+      type: boolean
+      example: false

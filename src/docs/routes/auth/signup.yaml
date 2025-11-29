@@ -1,0 +1,44 @@
+post:
+  tags:
+    - User Authentication
+  summary: Register a new user
+  requestBody:
+    required: true
+    # content:
+    #   application/json:
+    #     schema:
+          
+  # responses:
+  #   201:
+  #     description: User created successfully
+  #     content:
+  #       application/json:
+  #         schema:
+  #           $ref: '#/components/schemas/SignupOkResponse'
+    # 400:
+    #   description: invalid user input
+    #   content:
+    #     application/json:
+    #       schema:
+    #         $ref: '#/components/schemas/BadRequestResponse'
+    # 409:
+    #   description: when user trying to Authenticate while already is Authenticated
+    #   content:
+    #     application/json:
+    #       schema:
+    #         $ref: '#/components/schemas/AlreadyAuthenticated'
+    # 500:
+    #   description: when a server error occur or couldn't login user
+    #   content:
+    #     application/json:
+    #       schema:
+    #         anyOf:
+    #           - $ref: '#/components/schemas/ServerError1'
+    #           - $ref: '#/components/schemas/ServerError2'
+    #           - $ref: '#/components/schemas/SignupCantCreateUserResponse'
+    # 503:
+    #   description: connection to redis session store Failed
+    #   content:
+    #     application/json:
+    #       schema: 
+    #         $ref: '#/components/schemas/FailedRedisConnection'

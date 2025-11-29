@@ -1,0 +1,15 @@
+type: object
+properties:
+  email:
+    type: string
+    example: mostafa@example.com
+  password:
+    type: string
+    example: strongPassword1#
+  confirmPassword:
+    type: string
+    example: strongPassword1#
+required:
+  - email
+  - password
+  - confirmPassword
