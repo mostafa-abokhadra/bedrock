@@ -6,7 +6,10 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsc -p tsconfig.json && node dist/server.js",
-    "build": "tsc -p tsconfig.json && node dist/server.js"
+    "build": "tsc -p tsconfig.json && node dist/server.js",
+    "bundle": "swagger-cli bundle ./src/docs/openapi.yaml -o openapi-bundled.yaml -t yaml",
+    "validate": "swagger-cli validate openapi.yaml",
+    "serve": "swagger-cli serve openapi.yaml"
   },
   "repository": {
     "type": "git",
@@ -38,6 +41,7 @@
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
+    "@apidevtools/swagger-cli": "^4.0.4",
     "@types/bcrypt": "^6.0.0",
     "@types/cookie-parser": "^1.4.9",
     "@types/cors": "^2.8.19",

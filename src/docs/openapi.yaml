@@ -10,21 +10,8 @@ servers:
 paths:
   /auth/signup:
     $ref: './routes/auth/signup.yaml'
-  # /auth/login:
-  #   $ref: './routes/auth/login.yaml'
-  # /auth/logout:
-  #   $ref: './routes/auth/logout.yaml'
-  # /auth/csrf-token:
-  #   $ref: './routes/auth/csrfToken.yaml'
-
-  # /vaults:
-  #   $ref: './routes/vaults.yaml'
 
 components:
   schemas:
     signupRequest:
-      $ref: './components/parameters.yaml'
-  # parameters:
-  #   $ref: './components/parameters.yaml'
-  # securitySchemes:
-  #   $ref: './components/security.yaml'
+      $ref: './components/schemas/auth/signupRequest.yaml'
