@@ -9,4 +9,4 @@ servers:
 
 paths:
   /auth/signup:
-    $ref: './signup.yaml'
+    $ref: './paths/auth/signup.yaml'

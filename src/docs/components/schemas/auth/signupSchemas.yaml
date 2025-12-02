@@ -1,0 +1,43 @@
+signupRequest:
+  type: object
+  properties:
+    email:
+      type: string
+      format: email
+      example: mostafa_abokhadra@example.com
+    password:
+      type: string
+      format: password
+      example: mosTafa73#
+      description:
+        Must contains at least
+        - 8 characters
+        - 1 uppercase letter
+        - 1 lowercase letter
+        - 1 number
+        - 1 special character
+    confirmPassword:
+      type: string
+      format: password
+      example: mosTafa73#
+      description: Must match password field exactly
+  required:
+    - email
+    - password
+    - confirmPassword
+
+successfulUserCreation:
+  type: object
+  properties:
+    message:
+      type: string
+      example: User Created Successfully
+    user:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 692e37a996f1190dd2dd8086
+        email:
+          type: string
+          example: mostafa@example.com
