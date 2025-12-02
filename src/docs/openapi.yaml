@@ -9,9 +9,16 @@ servers:
 
 paths:
   /auth/signup:
-    $ref: './routes/auth/signup.yaml'
-
-components:
-  schemas:
-    signupRequest:
-      $ref: './components/schemas/auth/signupRequest.yaml'
+    post:
+      tags:
+        - User Authentication
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './components.yaml#/components/schemas/signupRequest'
+      responses:
+        201:
+          description: User created successfully
