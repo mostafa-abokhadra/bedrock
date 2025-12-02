@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsc -p tsconfig.json && swagger-cli bundle src/docs/openapi.yaml -o dist/docs/openapi-bundled.yaml -t yaml && node dist/server.js ",
-    "build": "tsc -p tsconfig.json && swagger-cli bundle src/docs/openapi.yaml -o docs/openapi.yaml -t yaml"
+    "build": "tsc -p tsconfig.json && swagger-cli bundle src/docs/openapi.yaml -o dist/docs/openapi-bundled.yaml -t yaml"
   },
   "repository": {
     "type": "git",

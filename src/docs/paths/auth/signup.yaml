@@ -7,7 +7,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: './components/schemas/auth/signupRequest.yaml#/signupRequest'
+          $ref: '../../components/schemas/auth/signupRequest.yaml#/signupRequest'
           # $ref: './components.yaml#/components/schemas/signupRequest'
   responses:
     201:
