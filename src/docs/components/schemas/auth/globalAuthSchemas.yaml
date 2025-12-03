@@ -4,3 +4,13 @@ FailedLogin:
     message:
       type: string
       example: Can not Login user
+
+FailedRedisConnection:
+  type: object
+  properties:
+    message:
+      type: string
+      example: "Authentication service unavailable. Please try again later."
+    redis: 
+      type: boolean
+      example: false

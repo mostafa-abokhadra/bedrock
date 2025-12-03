@@ -36,3 +36,9 @@ post:
               - $ref: '../../components/schemas/auth/signupSchemas.yaml#/FailedUserCreation'
               - $ref: '../../components/schemas/auth/globalAuthSchemas.yaml#/FailedLogin'
               - $ref: '../../components/schemas/globalSchemas.yaml#/ServerError'
+    503:
+      description: connection to session store Failed
+      content:
+        application/json:
+          schema: 
+            $ref: '../../components/schemas/auth/globalAuthSchemas.yaml#/FailedRedisConnection'
