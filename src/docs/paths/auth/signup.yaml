@@ -33,5 +33,6 @@ post:
         application/json:
           schema:
             anyOf:
-              - $ref: '../../components/schemas/globalSchemas.yaml#/ServerError'
+              - $ref: '../../components/schemas/auth/signupSchemas.yaml#/FailedUserCreation'
               - $ref: '../../components/schemas/auth/globalAuthSchemas.yaml#/FailedLogin'
+              - $ref: '../../components/schemas/globalSchemas.yaml#/ServerError'

@@ -64,3 +64,9 @@ BadRequestResponse:
           value:
             type: string
             example: ''
+FailedUserCreation:
+  type: object
+  properties:
+    message:
+      type: string
+      example: couldn't Create a User
