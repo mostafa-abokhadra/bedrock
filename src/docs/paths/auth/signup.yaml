@@ -15,3 +15,9 @@ post:
         application/json:
           schema:
             $ref: '../../components/schemas/auth/signupSchemas.yaml#/successfulUserCreation'
+    400:
+      description: invalid inputs 
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/auth/signupSchemas.yaml#/BadRequestResponse'

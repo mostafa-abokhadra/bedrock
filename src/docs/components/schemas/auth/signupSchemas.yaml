@@ -41,3 +41,26 @@ successfulUserCreation:
         email:
           type: string
           example: mostafa@example.com
+BadRequestResponse:
+  type: object
+  properties:
+    errors:
+      type: array
+      items:
+        type: object
+        properties:
+          msg:
+            type: string
+            example: Emali address is required
+          path:
+            type: string
+            example: email
+          location:
+            type: string
+            example: body
+          type:
+            type: string
+            example: field
+          value:
+            type: string
+            example: ''
