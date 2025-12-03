@@ -4,3 +4,13 @@ AlreadyAuthenticated:
     message:
       type: string
       example: Already Authenticated
+
+ServerError1:
+  type: object
+  properties:
+    message:
+      type: string
+      example: Server Error Occured
+    Error:
+      type: string
+      example: An Error message
