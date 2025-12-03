@@ -5,7 +5,7 @@ AlreadyAuthenticated:
       type: string
       example: Already Authenticated
 
-ServerError1:
+ServerError:
   type: object
   properties:
     message:

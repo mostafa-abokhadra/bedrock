@@ -1,0 +1,6 @@
+FailedLogin:
+  type: object
+  properties:
+    message:
+      type: string
+      example: Can not Login user

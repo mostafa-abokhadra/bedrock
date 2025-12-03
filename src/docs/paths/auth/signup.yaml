@@ -26,4 +26,12 @@ post:
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/global.yaml#/AlreadyAuthenticated'
+            $ref: '../../components/schemas/globalSchemas.yaml#/AlreadyAuthenticated'
+    500:
+      description: server error occured
+      content:
+        application/json:
+          schema:
+            anyOf:
+              - $ref: '../../components/schemas/globalSchemas.yaml#/ServerError'
+              - $ref: '../../components/schemas/auth/globalAuthSchemas.yaml#/FailedLogin'
