@@ -26,7 +26,7 @@ signupRequest:
     - password
     - confirmPassword
 
-successfulUserCreation:
+successfulUserCreationLogin:
   type: object
   properties:
     message:

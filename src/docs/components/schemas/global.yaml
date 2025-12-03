@@ -1,0 +1,6 @@
+AlreadyAuthenticated:
+  type: object
+  properties:
+    message:
+      type: string
+      example: Already Authenticated

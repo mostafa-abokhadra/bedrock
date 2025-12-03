@@ -14,10 +14,16 @@ post:
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/auth/signupSchemas.yaml#/successfulUserCreation'
+            $ref: '../../components/schemas/auth/signupSchemas.yaml#/successfulUserCreationLogin'
     400:
       description: invalid inputs 
       content:
         application/json:
           schema:
             $ref: '../../components/schemas/auth/signupSchemas.yaml#/BadRequestResponse'
+    409:
+      description: user tries to Authenticate while Authenticated
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/global.yaml#/AlreadyAuthenticated'
