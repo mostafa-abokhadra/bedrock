@@ -45,3 +45,10 @@ isNotAuthenticated:
     message:
       type: string
       example: User is Not Authenticated
+
+invalidCSRFtoken:
+  type: object
+  properties:
+    message:
+      type: string
+      example: Invalid CSRF Token
