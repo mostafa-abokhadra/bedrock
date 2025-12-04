@@ -25,22 +25,7 @@ signupRequest:
     - email
     - password
     - confirmPassword
-
-successfulUserCreationLogin:
-  type: object
-  properties:
-    message:
-      type: string
-      example: User Created Successfully
-    user:
-      type: object
-      properties:
-        _id:
-          type: string
-          example: 692e37a996f1190dd2dd8086
-        email:
-          type: string
-          example: mostafa@example.com
+    
 BadRequestResponse:
   type: object
   properties:
