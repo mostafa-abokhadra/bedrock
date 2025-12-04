@@ -3,7 +3,7 @@ successfulUserCreationLogin:
   properties:
     message:
       type: string
-      example: User Created Successfully
+      example: User Created Successfully or logged in successfully
     user:
       type: object
       properties:
@@ -13,7 +13,7 @@ successfulUserCreationLogin:
         email:
           type: string
           example: mostafa@example.com
-          
+
 FailedLogin:
   type: object
   properties:

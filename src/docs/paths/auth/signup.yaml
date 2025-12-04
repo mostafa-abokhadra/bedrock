@@ -20,7 +20,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/auth/signupSchemas.yaml#/BadRequestResponse'
+            $ref: '../../components/schemas/auth/globalSchemas.yaml#/BadRequestResponse'
     409:
       description: user tries to Authenticate while Authenticated
       content:

@@ -10,3 +10,10 @@ LoginRequest:
   required:
     - email
     - password
+
+WrongCredentials:
+  type: object
+  properties:
+    message:
+      type: string
+      example: Email or password is incorrect

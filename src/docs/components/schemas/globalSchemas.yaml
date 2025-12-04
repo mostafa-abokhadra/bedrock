@@ -1,3 +1,27 @@
+BadRequestResponse:
+  type: object
+  properties:
+    errors:
+      type: array
+      items:
+        type: object
+        properties:
+          msg:
+            type: string
+            example: field name is required
+          path:
+            type: string
+            example: field name
+          location:
+            type: string
+            example: body
+          type:
+            type: string
+            example: field
+          value:
+            type: string
+            example: ''
+  
 AlreadyAuthenticated:
   type: object
   properties:
