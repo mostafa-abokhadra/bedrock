@@ -38,3 +38,10 @@ ServerError:
     Error:
       type: string
       example: An Error message
+
+isNotAuthenticated:
+  type: object
+  properties:
+    message:
+      type: string
+      example: User is Not Authenticated
