@@ -3,10 +3,38 @@ post:
     - Vault APIs
   summary: create a new vault
   parameters: 
-    # - $ref: '#/components/parameters/CSRFtokenHeader'
+    - $ref: '../../components/parameters.yaml#/CSRFtokenHeader'
   requestBody:
     required: true
     content:
       application/json:
         schema:
           $ref: '../../components/schemas/vault/vaultSchemas.yaml#/createVaultBody'
+  responses:
+    201:
+      description: new vault created successfully
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/vault/vaultSchemas.yaml#/successfullVaultCreation'
+    403:
+      description: user try to make authenticated operation while not authenticated
+        or user sent an invalid csrf token
+      content:
+        application/json:
+          schema:
+            anyOf:
+              - $ref: '../../components/schemas/globalSchemas.yaml#/isNotAuthenticated'
+              - $ref: '../../components/schemas/globalSchemas.yaml#/invalidCSRFtoken'
+    400:
+      description: body field problem
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/globalSchemas.yaml#/BadRequestResponse'
+    500:
+      description: server error
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/globalSchemas.yaml#/ServerError'
