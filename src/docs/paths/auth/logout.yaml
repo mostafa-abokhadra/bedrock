@@ -1,0 +1,25 @@
+post:
+  tags:
+    - User Authentication
+  summary: logging out an authenticated user
+  responses:
+    200:
+      description: successfully logging out user, destroying session and clearing cookie
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/auth/logoutSchemas.yaml#/SuccessfulLogout'
+    403:
+      description: user try to logout while not authenticated
+      content:
+        application/json:
+          schema: 
+            $ref: '../../components/schemas/globalSchemas.yaml#/isNotAuthenticated'
+    500:
+      description: couldn't logout user or couldn't destroy the session
+      content:
+        application/json:
+          schema:
+            anyOf:
+              - $ref: '../../components/schemas/auth/logoutSchemas.yaml#/LogoutFailure'
+              - $ref: '../../components/schemas/auth/logoutSchemas.yaml#/SessionDestroyFailure'
