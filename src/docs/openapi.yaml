@@ -16,3 +16,6 @@ paths:
     $ref: './paths/auth/logout.yaml'
   /auth/csrf-token:
     $ref: './paths/auth/csrfToken.yaml'
+
+  /vaults:
+    $ref: './paths/vault/createVault.yaml'

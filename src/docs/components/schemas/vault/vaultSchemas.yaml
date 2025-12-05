@@ -1,0 +1,15 @@
+createVaultBody:
+  type: object
+  properties:
+    name:
+      type: string
+      example: vault name
+
+successfullVaultCreation:
+  type: object
+  properties:
+    message:
+      type: string
+      example: Vault created successfully
+    vault:
+      $ref: './globalVaultSchemas.yaml#/Vault'
