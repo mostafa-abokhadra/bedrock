@@ -5,8 +5,8 @@
   "description": "backend system for bedrock editor",
   "main": "index.js",
   "scripts": {
-    "dev": "tsc -p tsconfig.json && node dist/server.js",
-    "build": "tsc -p tsconfig.json && node dist/server.js"
+    "dev": "tsc -p tsconfig.json && swagger-cli bundle src/docs/openapi.yaml -o dist/docs/openapi-bundled.yaml -t yaml && node dist/server.js ",
+    "build": "tsc -p tsconfig.json && swagger-cli bundle src/docs/openapi.yaml -o docs/openapi.yaml -t yaml"
   },
   "repository": {
     "type": "git",
@@ -38,6 +38,7 @@
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
+    "@apidevtools/swagger-cli": "^4.0.4",
     "@types/bcrypt": "^6.0.0",
     "@types/cookie-parser": "^1.4.9",
     "@types/cors": "^2.8.19",

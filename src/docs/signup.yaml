@@ -1,0 +1,13 @@
+post:
+  tags:
+    - User Authentication
+  summary: Register a new user
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: 'components.yaml#/signupRequest'
+  responses:
+    201:
+      description: User created successfully
