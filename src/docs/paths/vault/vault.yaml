@@ -1,0 +1,158 @@
+post:
+  tags:
+    - Vault APIs
+  summary: create a new vault
+  security:
+    - BasicAuth: []
+  parameters: 
+    - $ref: '../../components/parameters.yaml#/CSRFtokenHeader'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/vault/vaultSchemas.yaml#/createVaultBody'
+  responses:
+    201:
+      description: new vault created successfully
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/vault/vaultSchemas.yaml#/successfullVaultCreation'
+    403:
+      description: user try to make authenticated operation while not authenticated
+        or user sent an invalid csrf token
+      content:
+        application/json:
+          schema:
+            anyOf:
+              - $ref: '../../components/schemas/globalSchemas.yaml#/isNotAuthenticated'
+              - $ref: '../../components/schemas/globalSchemas.yaml#/invalidCSRFtoken'
+    400:
+      description: body field problem
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/globalSchemas.yaml#/BadRequestResponse'
+    500:
+      description: server error
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/globalSchemas.yaml#/ServerError'
+get:
+  tags:
+    - Vault APIs
+  summary: getting all user vaults
+  security:
+  - BasicAuth: []
+  responses:
+    403:
+      description: user try to make authenticated operation while not authenticated
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/globalSchemas.yaml#/isNotAuthenticated'
+
+    200:
+      description: successfull retrieval of vaults
+      content:
+        application/json:
+          schema:
+            anyOf:
+              - $ref: '../../components/schemas/vault/vaultSchemas.yaml#/SuccessfullVaultsRetrieval'
+              - $ref: '../../components/schemas/vault/vaultSchemas.yaml#/SuccessfullVaultsRetrieval2'
+    500:
+      description: server error while getting vaults
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/globalSchemas.yaml#/ServerError'
+put:
+  tags:
+    - Vault APIs
+  summary: updating vault name
+  security:
+    - BasicAuth: []
+  parameters: 
+    - $ref: '../../components/parameters.yaml#/CSRFtokenHeader'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema: 
+          $ref: '../../components/schemas/vault/vaultSchemas.yaml#/updateVaultReq'
+  responses:
+    403:
+      description: user try to make authenticated operation while not authenticated
+        or user sent invalid csrf token
+      content:
+        application/json:
+          schema:
+            anyOf:
+              - $ref: '../../components/schemas/globalSchemas.yaml#/isNotAuthenticated'
+              - $ref: '../../components/schemas/globalSchemas.yaml#/invalidCSRFtoken'
+    200:
+      description: vault updated Successfully
+      content:
+        application/josn:
+          schema:
+            anyOf:
+              - $ref: '../../components/schemas/vault/vaultSchemas.yaml#/VaultUpdate200'
+              - $ref: '../../components/schemas/vault/vaultSchemas.yaml#/vaultDoesnotExist'
+    500:
+      description: server error Occured
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/globalSchemas.yaml#/ServerError'
+    400:
+      description: body field problem
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/globalSchemas.yaml#/BadRequestResponse'
+delete:
+  tags:
+    - Vault APIs
+  summary: delete a user vault
+  security:
+    - BasicAuth: []
+  parameters: 
+    - $ref: '../../components/parameters.yaml#/CSRFtokenHeader'
+  requestBody:
+    required: true
+    content: 
+      application/json:
+        schema:
+          $ref: '../../components/schemas/vault/vaultSchemas.yaml#/DeleteVaultBody'
+  responses:
+    403:
+      description: user try to make authenticated operation while not authenticated
+        or sent invalide csrf token
+      content:
+        application/json:
+          schema:
+            anyOf:
+              - $ref: '../../components/schemas/globalSchemas.yaml#/isNotAuthenticated'
+              - $ref: '../../components/schemas/globalSchemas.yaml#/invalidCSRFtoken'
+    200:
+      description: delete a user vault successfully
+      content:
+        application/json:
+          schema:
+            anyOf:
+              - $ref: '../../components/schemas/vault/vaultSchemas.yaml#/DeleteVault200'
+              - $ref: '../../components/schemas/vault/vaultSchemas.yaml#/vaultDoesnotExist'
+    500:
+      description: server error Occured
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/globalSchemas.yaml#/ServerError'
+    400:
+      description: body field problem
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/globalSchemas.yaml#/BadRequestResponse'
