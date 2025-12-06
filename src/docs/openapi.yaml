@@ -1,0 +1,26 @@
+openapi: 3.0.0
+info:
+  title: Bedrock APIs
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+  - url: https://bedrock-henna.vercel.app
+
+components:
+  securitySchemes:
+    $ref: './components/security/securitySchemes.yaml'
+
+paths:
+  /auth/signup:
+    $ref: './paths/auth/signup.yaml'
+  /auth/login:
+    $ref: './paths/auth/login.yaml'
+  /auth/logout:
+    $ref: './paths/auth/logout.yaml'
+  /auth/csrf-token:
+    $ref: './paths/auth/csrfToken.yaml'
+
+  /vaults:
+    $ref: './paths/vault/vault.yaml'
+

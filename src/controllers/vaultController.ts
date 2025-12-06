@@ -1,7 +1,6 @@
 import { Vault } from "../models/vault.model.js";
 import { User } from "../models/user.model.js";
 import mongoose from "mongoose";
-import { findPackageJSON } from "module";
 
 export default class vaultController {
 

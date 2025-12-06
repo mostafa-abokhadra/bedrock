@@ -1,0 +1,19 @@
+LoginRequest:
+  type: object
+  properties:
+    email:
+      type: string
+      example: validRegisteredEmail@example.com
+    password:
+      type: string
+      example: yourStrongPassword123#
+  required:
+    - email
+    - password
+
+WrongCredentials:
+  type: object
+  properties:
+    message:
+      type: string
+      example: Email or password is incorrect

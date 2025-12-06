@@ -1,0 +1,54 @@
+BadRequestResponse:
+  type: object
+  properties:
+    errors:
+      type: array
+      items:
+        type: object
+        properties:
+          msg:
+            type: string
+            example: field name is required
+          path:
+            type: string
+            example: field name
+          location:
+            type: string
+            example: body
+          type:
+            type: string
+            example: field
+          value:
+            type: string
+            example: ''
+  
+AlreadyAuthenticated:
+  type: object
+  properties:
+    message:
+      type: string
+      example: Already Authenticated
+
+ServerError:
+  type: object
+  properties:
+    message:
+      type: string
+      example: Server Error Occured
+    Error:
+      type: string
+      example: An Error message
+
+isNotAuthenticated:
+  type: object
+  properties:
+    message:
+      type: string
+      example: User is Not Authenticated
+
+invalidCSRFtoken:
+  type: object
+  properties:
+    message:
+      type: string
+      example: Invalid CSRF Token

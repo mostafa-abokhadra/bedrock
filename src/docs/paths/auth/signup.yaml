@@ -1,0 +1,44 @@
+post:
+  tags:
+    - User Authentication
+  summary: Register a new user
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/auth/signupSchemas.yaml#/signupRequest'
+  responses:
+    201:
+      description: User created successfully
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/auth/globalAuthSchemas.yaml#/successfulUserCreationLogin'
+    400:
+      description: invalid inputs 
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/globalSchemas.yaml#/BadRequestResponse'
+    409:
+      description: user tries to Authenticate while Authenticated
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/globalSchemas.yaml#/AlreadyAuthenticated'
+    500:
+      description: server error occured
+      content:
+        application/json:
+          schema:
+            anyOf:
+              - $ref: '../../components/schemas/auth/signupSchemas.yaml#/FailedUserCreation'
+              - $ref: '../../components/schemas/auth/globalAuthSchemas.yaml#/FailedLogin'
+              - $ref: '../../components/schemas/globalSchemas.yaml#/ServerError'
+    503:
+      description: connection to session store Failed
+      content:
+        application/json:
+          schema: 
+            $ref: '../../components/schemas/auth/globalAuthSchemas.yaml#/FailedRedisConnection'

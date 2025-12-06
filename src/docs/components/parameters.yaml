@@ -1,0 +1,8 @@
+CSRFtokenHeader:
+  name: X-CSRF-Token
+  in: header
+  required: true
+  description: token value returned from /auth/csrf-token GET
+  schema:
+    type: string
+    example: "m41rAslv-vdpVvLNjoO2SzHLugWvh3kclJXc"
