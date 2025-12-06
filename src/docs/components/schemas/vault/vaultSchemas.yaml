@@ -57,3 +57,17 @@ vaultDoesnotExist:
     message:
       type: string
       example: vault doesn't exist
+
+DeleteVaultBody:
+  type: object
+  properties:
+    name:
+      type: string
+      example: vault name to be deleted
+
+DeleteVault200:
+  type: object
+  properties:
+    message:
+      type: string
+      example: vault deleted successfully
