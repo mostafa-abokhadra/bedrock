@@ -7,7 +7,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: 'components.yaml#/signupRequest'
+          $ref: './components.yaml#/components/schemas/signupRequest'
   responses:
     201:
       description: User created successfully
