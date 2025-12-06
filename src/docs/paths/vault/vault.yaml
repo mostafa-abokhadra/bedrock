@@ -65,3 +65,40 @@ get:
         application/json:
           schema:
             $ref: '../../components/schemas/globalSchemas.yaml#/ServerError'
+
+put:
+  tags:
+    - Vault APIs
+  summary: updating vault name
+  parameters: 
+    - $ref: '../../components/parameters.yaml#/CSRFtokenHeader'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema: 
+          $ref: '../../components/schemas/vault/vaultSchemas.yaml#/updateVaultReq'
+  responses:
+    403:
+      description: user try to make authenticated operation while not authenticated
+        or user sent invalid csrf token
+      content:
+        application/json:
+          schema:
+            anyOf:
+              - $ref: '../../components/schemas/globalSchemas.yaml#/isNotAuthenticated'
+              - $ref: '../../components/schemas/globalSchemas.yaml#/invalidCSRFtoken'
+    200:
+      description: vault updated Successfully
+      content:
+        application/josn:
+          schema:
+            anyOf:
+              - $ref: '../../components/schemas/vault/vaultSchemas.yaml#/VaultUpdate200'
+              - $ref: '../../components/schemas/vault/vaultSchemas.yaml#/vaultDoesnotExist'
+    500:
+      description: server error Occured
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/globalSchemas.yaml#/ServerError'

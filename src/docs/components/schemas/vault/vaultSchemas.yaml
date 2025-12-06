@@ -31,3 +31,29 @@ SuccessfullVaultsRetrieval2:
     message:
       type: string
       example: user has no vaults
+
+updateVaultReq:
+  type: object
+  properties:
+    oldName:
+      type: string
+      example: old vault name
+    newName:
+      type: string
+      example: new vault name
+
+VaultUpdate200:
+  type: object
+  properties:
+    message:
+      type: string
+      example: vault updated successfully
+    vault:
+      $ref: './globalVaultSchemas.yaml#/Vault'
+
+vaultDoesnotExist:
+  type: object
+  properties:
+    message:
+      type: string
+      example: vault doesn't exist
