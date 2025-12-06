@@ -13,3 +13,21 @@ successfullVaultCreation:
       example: Vault created successfully
     vault:
       $ref: './globalVaultSchemas.yaml#/Vault'
+
+SuccessfullVaultsRetrieval:
+  type: object
+  properties:
+    message:
+      type: string
+      example: vaults retreived successfully
+    vaults:
+      type: array
+      items:
+        $ref: './globalVaultSchemas.yaml#/Vault'
+
+SuccessfullVaultsRetrieval2:
+  type: object
+  properties:
+    message:
+      type: string
+      example: user has no vaults

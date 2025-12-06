@@ -18,4 +18,4 @@ paths:
     $ref: './paths/auth/csrfToken.yaml'
 
   /vaults:
-    $ref: './paths/vault/createVault.yaml'
+    $ref: './paths/vault/vault.yaml'

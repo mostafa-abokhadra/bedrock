@@ -38,3 +38,30 @@ post:
         application/json:
           schema:
             $ref: '../../components/schemas/globalSchemas.yaml#/ServerError'
+
+get:
+  tags:
+    - Vault APIs
+  summary: getting all user vaults
+  responses:
+    403:
+      description: user try to make authenticated operation while not authenticated
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/globalSchemas.yaml#/isNotAuthenticated'
+
+    200:
+      description: successfull retrieval of vaults
+      content:
+        application/json:
+          schema:
+            anyOf:
+              - $ref: '../../components/schemas/vault/vaultSchemas.yaml#/SuccessfullVaultsRetrieval'
+              - $ref: '../../components/schemas/vault/vaultSchemas.yaml#/SuccessfullVaultsRetrieval2'
+    500:
+      description: server error while getting vaults
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/globalSchemas.yaml#/ServerError'
