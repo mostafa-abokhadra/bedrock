@@ -1,0 +1,21 @@
+signupRequest:
+  type: object
+  properties:
+    email:
+      type: string
+      format: email
+      example: mostafa@example.com
+    password:
+      type: string
+      format: password
+      minLength: 8
+      example: strongPassword1#
+    confirmPassword:
+      type: string
+      format: password
+      minLength: 8
+      example: strongPassword1#
+  required:
+    - email
+    - password
+    - confirmPassword
