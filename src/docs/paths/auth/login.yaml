@@ -1,43 +1,46 @@
 post:
   tags:
     - User Authentication
-  summary: Register a new user
+  summary: Login the user in and creating a new session
   requestBody:
     required: true
     content:
       application/json:
         schema:
-          $ref: '../../components/schemas/auth/signupSchemas.yaml#/signupRequest'
+          $ref: '../../components/schemas/auth/loginSchemas.yaml#/LoginRequest'
   responses:
-    201:
-      description: User created successfully
+    200:
+      description: successfull login
       content:
         application/json:
-          schema:
+          schema: 
             $ref: '../../components/schemas/auth/globalAuthSchemas.yaml#/successfulUserCreationLogin'
     400:
-      description: invalid inputs 
-      content:
-        application/json:
-          schema:
-            $ref: '../../components/schemas/globalSchemas.yaml#/BadRequestResponse'
-    409:
-      description: user tries to Authenticate while Authenticated
-      content:
-        application/json:
-          schema:
-            $ref: '../../components/schemas/globalSchemas.yaml#/AlreadyAuthenticated'
-    500:
-      description: server error occured
+      description: invalid user inputs
       content:
         application/json:
           schema:
             anyOf:
-              - $ref: '../../components/schemas/auth/signupSchemas.yaml#/FailedUserCreation'
-              - $ref: '../../components/schemas/auth/globalAuthSchemas.yaml#/FailedLogin'
+              - $ref: '../../components/schemas/globalSchemas.yaml#/BadRequestResponse'
+              - $ref: '../../components/schemas/auth/loginSchemas.yaml#/WrongCredentials'
+
+    409:
+      description: user try to authenticate while Authenticated
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/globalSchemas.yaml#/AlreadyAuthenticated'
+    
+    500:
+      description: server error occured or couldn't login the user
+      content:
+        application/json:
+          schema:
+            anyOf:
               - $ref: '../../components/schemas/globalSchemas.yaml#/ServerError'
+              - $ref: '../../components/schemas/auth/globalAuthSchemas.yaml#/FailedLogin'
     503:
-      description: connection to session store Failed
+      description: connection to redis session store Failed
       content:
         application/json:
           schema: 
