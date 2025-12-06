@@ -7,6 +7,10 @@ servers:
   - url: http://localhost:8080
   - url: https://bedrock-henna.vercel.app
 
+components:
+  securitySchemes:
+    $ref: './components/security/securitySchemes.yaml'
+
 paths:
   /auth/signup:
     $ref: './paths/auth/signup.yaml'
@@ -19,3 +23,4 @@ paths:
 
   /vaults:
     $ref: './paths/vault/vault.yaml'
+

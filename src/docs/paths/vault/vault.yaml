@@ -2,6 +2,8 @@ post:
   tags:
     - Vault APIs
   summary: create a new vault
+  security:
+    - BasicAuth: []
   parameters: 
     - $ref: '../../components/parameters.yaml#/CSRFtokenHeader'
   requestBody:
@@ -38,11 +40,12 @@ post:
         application/json:
           schema:
             $ref: '../../components/schemas/globalSchemas.yaml#/ServerError'
-
 get:
   tags:
     - Vault APIs
   summary: getting all user vaults
+  security:
+  - BasicAuth: []
   responses:
     403:
       description: user try to make authenticated operation while not authenticated
@@ -65,11 +68,12 @@ get:
         application/json:
           schema:
             $ref: '../../components/schemas/globalSchemas.yaml#/ServerError'
-
 put:
   tags:
     - Vault APIs
   summary: updating vault name
+  security:
+    - BasicAuth: []
   parameters: 
     - $ref: '../../components/parameters.yaml#/CSRFtokenHeader'
   requestBody:
@@ -108,12 +112,12 @@ put:
         application/json:
           schema:
             $ref: '../../components/schemas/globalSchemas.yaml#/BadRequestResponse'
-
-
 delete:
   tags:
     - Vault APIs
   summary: delete a user vault
+  security:
+    - BasicAuth: []
   parameters: 
     - $ref: '../../components/parameters.yaml#/CSRFtokenHeader'
   requestBody:

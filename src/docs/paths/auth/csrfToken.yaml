@@ -2,6 +2,8 @@ get:
   tags:
     - User Authentication
   summary: get csrf token need for any state changing request (e:g post put delete)
+  security:
+    - BasicAuth: []
   responses:
     200:
       description: successfully got csrf token
