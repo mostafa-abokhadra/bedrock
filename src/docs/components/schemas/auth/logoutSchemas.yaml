@@ -1,0 +1,20 @@
+SuccessfulLogout:
+  type: object
+  properties:
+    message: 
+      type: string
+      example: logged out successfully
+
+LogoutFailure:
+  type: object
+  properties:
+    message: 
+      type: string
+      example: can not logout the user
+
+SessionDestroyFailure:
+  type: object
+  properties:
+    message: 
+      type: string
+      example: Can not destroy user session

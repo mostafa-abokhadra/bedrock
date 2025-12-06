@@ -1,0 +1,21 @@
+Vault:
+  type: object
+  properties:
+    name: 
+      type: string
+      example: my vault name
+    author:
+      type: string
+      example: 6917178154e6263364b7b104
+    _id:
+      type: string
+      example: 6917202776ff9538772eb48a
+    createdAt:
+      type: string
+      example: 2025-11-14T12:27:19.715Z
+    updatedAt:
+      type: string
+      example: 2025-11-14T12:27:19.715Z
+    __v:
+      type: number
+      example: 0
