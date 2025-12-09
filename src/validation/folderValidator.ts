@@ -1,11 +1,11 @@
 import { body, param } from "express-validator";
 
-const vaultIdValidator = [
-    param("vaultId")
-    .not().isEmpty().withMessage("vault id is required")
+export const parentIdValidator = [
+    param("parentId")
+    .not().isEmpty().withMessage("parent id is required")
 ]
 
-const nameValidator = [
+export const nameValidator = [
     body("name")
     .not().isEmpty().withMessage("folder name is required")
     .isString().withMessage("folder name must be a string")
