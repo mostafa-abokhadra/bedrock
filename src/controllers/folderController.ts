@@ -3,10 +3,9 @@ import { Folder } from "../models/folder.model.js";
 import mongoose from "mongoose";
 
 class folderController {
-    static async function (req: any, res: any) {
+    static async createFolder (req: any, res: any) {
 
-        const {parentId} = req.params
-        const {name} = req.body
+        const {name, parentId} = req.body
         let parentType = 'Vault';
         let folderParent = null;
 
@@ -16,24 +15,22 @@ class folderController {
 
             session.startTransaction()
 
-            const vaultParent = await Vault.findOne({_id: req.user._id})
+            const vaultParent = await Vault.findOne({author: req.user._id, _id: parentId })
 
             if (!vaultParent) {
-                folderParent = await Folder.findOne({_id: req.user._id})
+                folderParent = await Folder.findOne({author: req.user._id, _id: parentId})
                 if (!folderParent) {
                     await session.abortTransaction()
                     return res.status(400).json({message: "parent doesn't exist"})
                 }
                 parentType = "Folder"
             }
-
             const newFolder = await Folder.create({
                 author: req.user._id,
                 name: name,
                 parentType: parentType,
                 parent: parentId},
             )
-
             if (parentType === "Vault") {
                 const updateVault = await Vault.findByIdAndUpdate(
                     {_id: parentId},
@@ -44,9 +41,11 @@ class folderController {
             }
 
             await session.commitTransaction()
-
-        } catch(error) {
+            
+            return res.status(201).json({message: "folder has been created successfully", folder: newFolder})
+        } catch(error: any) {
             console.log("an error", error)
+            return res.status(500).json({message: "an error has occured", error: error.msg})
         } finally {
             session.endSession()
         }

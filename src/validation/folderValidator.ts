@@ -1,7 +1,7 @@
-import { body, param } from "express-validator";
+import { body } from "express-validator";
 
 export const parentIdValidator = [
-    param("parentId")
+    body("parentId")
     .not().isEmpty().withMessage("parent id is required")
 ]
 
