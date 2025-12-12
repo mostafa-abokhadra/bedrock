@@ -32,20 +32,23 @@ class folderController {
                 parent: parentId},
             )
             if (parentType === "Vault") {
-                const updateVault = await Vault.findByIdAndUpdate(
+                await Vault.findByIdAndUpdate(
                     {_id: parentId},
                     {$addToSet: {folders: newFolder._id}}
                 )
             } else {
-                console.log("still not finished feature ")
+                await Folder.findByIdAndUpdate(
+                    {_id: parentId},
+                    {$addToSet: {folders: newFolder._id}}
+                )
             }
 
             await session.commitTransaction()
-            
+
             return res.status(201).json({message: "folder has been created successfully", folder: newFolder})
         } catch(error: any) {
             console.log("an error", error)
-            return res.status(500).json({message: "an error has occured", error: error.msg})
+            return res.status(500).json({message: "an error has occured, check the logs"})
         } finally {
             session.endSession()
         }
