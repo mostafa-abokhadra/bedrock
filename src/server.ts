@@ -15,6 +15,7 @@ import signupRoutes from "./routes/auth/signupRoutes.js";
 import csrfRoutes from "./routes/auth/csrfRoute.js";
 
 import vaultRoutes from './routes/vaultRoutes.js'
+import folderRoutes from './routes/folderRoutes.js'
 
 const server = express()
 server.set('trust proxy', 1);
@@ -35,10 +36,11 @@ server.use('/auth', loginRoutes);
 server.use('/auth', signupRoutes);
 server.use('/auth', csrfRoutes);
 server.use('/', vaultRoutes);
+server.use('/', folderRoutes)
 server.use('/', apiDocsRoute);
 
 server.get('/', async (req, res) => {
-    return res.send("<h1>Bedrock Home page 3</h1>");
+    return res.send("<h1>Bedrock Home page 77</h1>");
 })
 
 server.listen(process.env.PORT, () => {
