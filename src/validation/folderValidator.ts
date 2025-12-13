@@ -11,3 +11,8 @@ export const nameValidator = [
     .isString().withMessage("folder name must be a string")
     .isLength({max: 30}).withMessage("folder name must not excced 30 character")
 ]
+
+export const folderIdValidator = [
+    body("folderId")
+    .not().isEmpty().withMessage("folder Id is required")
+]
