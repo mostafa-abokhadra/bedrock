@@ -22,5 +22,6 @@ router.delete(
     csrfMiddleware,
     folderIdValidator,
     handleValidationError,
+    folderController.deleteFolder
 )
 export default router;
