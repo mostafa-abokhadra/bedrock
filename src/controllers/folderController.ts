@@ -99,5 +99,14 @@ class folderController {
             session.endSession()
         }
     }
+    static async getFolders(req: any, res: any) {
+        try {
+
+        } catch(error) {
+
+        } finally {
+            
+        }
+    }
 }
 export default folderController;
