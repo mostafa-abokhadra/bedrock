@@ -101,11 +101,15 @@ class folderController {
     }
     static async getFolders(req: any, res: any) {
         try {
-
+            const folders = await Folder.find({author: req.user._id})
+            if (folders.length === 0)
+                return res.status(200).json({message: "user has no folders"})
+            return req.status(200).json(
+                {message: "folders retreived successfully", folders: folders}
+            )
         } catch(error) {
-
-        } finally {
-            
+            console.log("an error", error)
+            return res.status(500).json({message: "a server error has occured"})
         }
     }
 }
