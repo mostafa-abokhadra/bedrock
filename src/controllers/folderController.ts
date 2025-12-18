@@ -112,5 +112,25 @@ class folderController {
             return res.status(500).json({message: "a server error has occured"})
         }
     }
+    static async updateFolder(req: any, res: any){
+        try {
+            const {oldName, name} = req.body
+
+            const newFolder = await Folder.findOneAndUpdate(
+                {author: req.user._id, name: oldName},
+                {name: name},
+                {new: true, runValidators: true}
+            )
+
+            if (!newFolder)
+                return res.status(400).json({"message": "can't find folder"})
+            return res.status(200).json(
+                {message: "folder has been updated successfully", folder: newFolder}
+            )
+        } catch(error) {
+            console.log(error)
+            return res.status(500).json({message: "server error occured", error: error})
+        }
+    }
 }
 export default folderController;
