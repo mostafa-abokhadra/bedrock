@@ -30,4 +30,5 @@ router.get(
     isAuthenticated,
     folderController.getFolders
 )
+
 export default router;
