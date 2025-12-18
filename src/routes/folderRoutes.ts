@@ -24,4 +24,10 @@ router.delete(
     handleValidationError,
     folderController.deleteFolder
 )
+
+router.get(
+    '/folders',
+    isAuthenticated,
+    folderController.getFolders
+)
 export default router;
