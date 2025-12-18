@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { isAuthenticated } from "../middlewares/sessionManage.js";
 import csrfMiddleware from "../middlewares/csrfProtection.js";
-import { parentIdValidator, nameValidator, folderIdValidator} from "../validation/folderValidator.js";
+import { parentIdValidator, nameValidator, folderIdValidator, oldNameValidator} from "../validation/folderValidator.js";
 import handleValidationError from "../middlewares/handleValidationErrors.js";
 import folderController from "../controllers/folderController.js";
 const router = Router()
@@ -31,4 +31,12 @@ router.get(
     folderController.getFolders
 )
 
+router.put(
+    '/folders',
+    isAuthenticated,
+    csrfMiddleware,
+    oldNameValidator,
+    nameValidator,
+    handleValidationError,
+)
 export default router;
