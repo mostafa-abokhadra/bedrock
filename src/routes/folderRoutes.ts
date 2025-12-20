@@ -38,5 +38,6 @@ router.put(
     oldNameValidator,
     nameValidator,
     handleValidationError,
+    folderController.updateFolder
 )
 export default router;
