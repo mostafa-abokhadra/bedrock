@@ -16,3 +16,8 @@ export const folderIdValidator = [
     body("folderId")
     .not().isEmpty().withMessage("folder Id is required")
 ]
+
+export const oldNameValidator = [
+    body('oldName')
+    .not().isEmpty().withMessage("old name is required")
+]
