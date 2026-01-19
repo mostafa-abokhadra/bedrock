@@ -42,7 +42,7 @@ server.use('/', folderRoutes)
 server.use('/', apiDocsRoute);
 
 server.get('/', async (req, res) => {
-    return res.send("<h1>Bedrock Home page 70</h1>");
+    return res.send("<h1>Bedrock Home page 99</h1>");
 })
 
 server.listen(process.env.PORT, () => {
