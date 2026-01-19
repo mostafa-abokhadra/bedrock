@@ -2,7 +2,7 @@ import { User } from "../models/user.model.js";
 
 export async function sanitizeUser(email: string) {
     try {
-        const user = await User.findOne({email}).select("id email")
+        const user = await User.findOne({email}).select("id email vaults createdAt updatedAt")
         if (!user)
             return null
         return user;
