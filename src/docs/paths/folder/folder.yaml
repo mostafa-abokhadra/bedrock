@@ -1,0 +1,21 @@
+post:
+  tags:
+    - Folder APIs
+  summary: create a new folder
+  security:
+    - BasicAuth: []
+  parameters:
+    - $ref: '../../components/parameters.yaml#/CSRFtokenHeader'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/folder/folderSchemas.yaml#/CreateFolderBody'
+  responses:
+    201:
+      description: new folder created successfully
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/folder/folderSchemas.yaml#/SuccessfulFolderCreation'
