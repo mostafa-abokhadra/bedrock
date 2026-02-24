@@ -1,0 +1,16 @@
+CreateFolderBody:
+  type: object
+  properties:
+    name:
+      type: string
+      example: my first folder
+    parentId:
+      type: string
+      example: parent id (a vault or a subfolder)
+
+SuccessfulFolderCreation:
+  type: object
+  properties:
+    message:
+      type: string
+      example: "folder has been created successfully"
