@@ -24,3 +24,6 @@ paths:
   /vaults:
     $ref: './paths/vault/vault.yaml'
 
+  /folders:
+    $ref: './paths/folder/folder.yaml'
+
