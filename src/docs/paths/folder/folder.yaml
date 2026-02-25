@@ -28,3 +28,9 @@ post:
             anyOf:
               - $ref: '../../components/schemas/globalSchemas.yaml#/isNotAuthenticated'
               - $ref: '../../components/schemas/globalSchemas.yaml#/invalidCSRFtoken'
+    400:
+      description: body field problem
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/globalSchemas.yaml#/BadRequestResponse'
