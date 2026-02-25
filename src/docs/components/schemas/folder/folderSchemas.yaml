@@ -14,3 +14,10 @@ SuccessfulFolderCreation:
     message:
       type: string
       example: "folder has been created successfully"
+
+FolderParentNotFound:
+  type: object
+  properties:
+    messsage:
+      type: string
+      example: "parent doesn't exist"
