@@ -33,9 +33,9 @@ post:
       content:
         application/json:
           schema:
-            anyof:
+            anyOf:
               - $ref: '../../components/schemas/globalSchemas.yaml#/BadRequestResponse'
-              - $ref: '../../components/schemas/folder/folderSchemas#/FolderParentNotFound'
+              - $ref: '../../components/schemas/folder/folderSchemas.yaml#/FolderParentNotFound'
     500:
       description: server error
       content:
