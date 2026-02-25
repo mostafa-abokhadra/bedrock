@@ -29,11 +29,13 @@ post:
               - $ref: '../../components/schemas/globalSchemas.yaml#/isNotAuthenticated'
               - $ref: '../../components/schemas/globalSchemas.yaml#/invalidCSRFtoken'
     400:
-      description: body field problem
+      description: body field problem or FolderParentNotFound
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/globalSchemas.yaml#/BadRequestResponse'
+            anyof:
+              - $ref: '../../components/schemas/globalSchemas.yaml#/BadRequestResponse'
+              - $ref: '../../components/schemas/folder/folderSchemas#/FolderParentNotFound'
     500:
       description: server error
       content:
