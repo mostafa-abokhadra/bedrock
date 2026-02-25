@@ -34,3 +34,9 @@ post:
         application/json:
           schema:
             $ref: '../../components/schemas/globalSchemas.yaml#/BadRequestResponse'
+    500:
+      description: server error
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/globalSchemas.yaml#/ServerError'
