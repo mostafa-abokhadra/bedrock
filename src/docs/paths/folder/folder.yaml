@@ -19,3 +19,12 @@ post:
         application/json:
           schema:
             $ref: '../../components/schemas/folder/folderSchemas.yaml#/SuccessfulFolderCreation'
+    403:
+      description: user try to make authenticated operation while not authenticated
+        or user sent an invalid csrf token
+      content:
+        application/json:
+          schema:
+            anyOf:
+              - $ref: '../../components/schemas/globalSchemas.yaml#/isNotAuthenticated'
+              - $ref: '../../components/schemas/globalSchemas.yaml#/invalidCSRFtoken'
