@@ -57,6 +57,12 @@ delete:
         schema:
           - ref: '../../components/schemas/folder/folderSchemas.yaml#/DeleteFolderBody'
   responses:
+    200:
+      description: folder has been deleted successfully
+      content:
+        application/json:
+          schema:
+            - $ref: '../../components/schemas/folder/folderSchemas.yaml#/SuccessfulFolderDeletion'
     403:
       description: user try to make authenticated operation while not authenticated
         or user sent an invalid csrf token

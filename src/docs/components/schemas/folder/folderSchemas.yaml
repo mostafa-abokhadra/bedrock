@@ -35,3 +35,10 @@ FolderNotFound:
     messsage:
       type: string
       example: "folder doesn't exist"
+
+SuccessfulFolderDeletion:
+  type: object
+  properties:
+    message:
+      type: string
+      example: "folder has been deleted successfully"
