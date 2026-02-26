@@ -42,3 +42,17 @@ post:
         application/json:
           schema:
             $ref: '../../components/schemas/globalSchemas.yaml#/ServerError'
+delete:
+  tags:
+    - Folder APIs
+  summary: delete a folder permenantly
+  security:
+    - BasicAuth: []
+  parameters:
+    - $ref: '../../components/parameters.yaml#/CSRFtokenHeader'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          - ref: '../../components/schemas/folder/folderSchemas.yaml#/deleteFolderBody' 

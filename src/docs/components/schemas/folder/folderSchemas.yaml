@@ -21,3 +21,10 @@ FolderParentNotFound:
     messsage:
       type: string
       example: "parent doesn't exist"
+
+deleteFolderBody:
+  type: object
+  properties:
+    folderId:
+      type: string
+      example: 6917178154e6263364b7b104
