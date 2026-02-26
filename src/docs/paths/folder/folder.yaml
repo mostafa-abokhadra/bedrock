@@ -55,4 +55,28 @@ delete:
     content:
       application/json:
         schema:
-          - ref: '../../components/schemas/folder/folderSchemas.yaml#/deleteFolderBody' 
+          - ref: '../../components/schemas/folder/folderSchemas.yaml#/DeleteFolderBody'
+  responses:
+    403:
+      description: user try to make authenticated operation while not authenticated
+        or user sent an invalid csrf token
+      content:
+        application/json:
+          schema:
+            anyOf:
+              - $ref: '../../components/schemas/globalSchemas.yaml#/isNotAuthenticated'
+              - $ref: '../../components/schemas/globalSchemas.yaml#/invalidCSRFtoken'
+    400:
+      description: body field problem or folder can't be found
+      content:
+        application/json:
+          schema:
+            anyOf:
+              - $ref: '../../components/schemas/globalSchemas.yaml#/BadRequestResponse'
+              - $ref: '../../components/schemas/folder/folderSchemas.yaml#/FolderNotFound'
+    500:
+      description: server error
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/globalSchemas.yaml#/ServerError'
